@@ -1,8 +1,9 @@
 # Project specific
-.vscode/
-.DS_Store
-test*
+references/
 data/
+.vscode/
+test*
+.DS_Store
 miluphcuda
 impact.0000
 material_test.cfg
