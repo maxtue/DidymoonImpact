@@ -3,10 +3,11 @@ Computational physics simulations for the NASA/ESA asteroid deflection mission D
 https://www.esa.int/Safety_Security/Hera
 
 ## Motivation
-Can an asteroid coming for our earth be redirected by a satellite impact? To find out, NASA is sending a small satellite to the Didymos asteroid binary. The satellite will crash into the smaller Didymos B, informally called Didymoon. ESA will later look at the results with its own HERA mission. \
+Can an asteroid coming for our earth be redirected by a satellite impact? To find out, NASA is sending a small satellite to the Didymos asteroid binary. The satellite will crash into the smaller Didymos B, informally called Didymoon. ESA will later look at the results with its own HERA mission.\
 \
-Numerical simulations before the mission support its planning and execution. Many material properties of the Didymoon asteroid are unknown and the exact impact conditions might vary. This project therefore simulates the outcome of the DART impact for different parameters.
+Numerical simulations before the mission support its planning and execution. Many material properties of the Didymoon asteroid are unknown and the exact impact conditions might vary. This project therefore simulates the outcome of the DART impact for different parameters.\
 \
+
 ![](https://github.com/maxtue/DidymoonImpact/blob/master/dart_impact.jpg)
 
 ## Tech used
