@@ -12,4 +12,4 @@ All simulations are done with [miluphcuda](https://github.com/christophmschaefer
 [miluphcuda](https://github.com/christophmschaefer/miluphcuda) is build and maintained mainly by Christoph Schaefer in the computational physics group ([CPT](https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/physik/institute/astronomie-astrophysik/institut/computational-physics/willkommen/)) at the University of Tuebingen.
 
 ## A last note...
-If [this](https://www.youtube.com/watch?v=tq02C_3FvFo) Meteor had come down over Paris instead of Siberia, the DART/Hera mission would have even more more funding. :money:
+If [this](https://www.youtube.com/watch?v=tq02C_3FvFo) Meteor had come down over Paris instead of Siberia, the DART/Hera mission would have even more more funding.
