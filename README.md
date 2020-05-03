@@ -3,7 +3,7 @@ Computational physics simulations for the NASA/ESA asteroid deflection mission D
 https://www.esa.int/Safety_Security/Hera
 
 ## Motivation
-A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
+If [this](https://www.youtube.com/watch?v=tq02C_3FvFo) Meteor had come down over Paris instead of Siberia, the DART/Hera mission would have even more more funding. 
 
 ## Tech used
 All simulations are done with [miluphcuda](https://github.com/christophmschaefer/miluphcuda), a [Smoothed particle hydrodynamics](https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics) code capable of parallel computing on NVIDIA GPUs.
