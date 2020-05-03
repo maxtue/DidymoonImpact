@@ -1,5 +1,7 @@
 # DidymoonImpact
-Computational physics simulations for the NASA/ESA asteroid deflection mission DART/Hera in 2022: https://www.esa.int/Safety_Security/Hera
+Computational physics simulations for the NASA/ESA asteroid deflection mission DART/Hera in 2022: 
+https://www.nasa.gov/planetarydefense/dart
+https://www.esa.int/Safety_Security/Hera
 
 ## Motivation
 A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
