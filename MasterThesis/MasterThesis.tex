@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[style=numeric,sorting=ynt]{biblatex}
+\addbibresource{MasterThesis_References.bib}
+ 
+\title{Asteroid Deflection Impact Simulations}
+\author{Maximilian Rutz}
+\date{}
+ 
+\begin{document}
+ 	% front page
+	\maketitle
+	\begin{abstract}
+	 
+	\end{abstract}
+	
+	% Contents page
+	\newpage
+	\tableofcontents
+	 
+	% Begin of sections
+	\newpage
+	\section{Introduction} 
+	\section{Theory}
+		\subsection{SPH}
+		\subsection{Dart Impact}
+	\section{Methods}
+		\subsection{SPH configuration}
+		- contents of parameter.h file
+		\subsection{Material configuration and initial setup}
+			\subsubsection{SPH-particle positions}
+			- particle distance in relation to sml
+			- problem with resolution
+			\subsubsection{Equation of State}
+			- Tillotson
+			\subsubsection{Porosity model}	
+			- p-alpha		
+			Most of this subsection is taken from \cite{Jutzi_p_alpha_1}.
+			\subsubsection{Boundary layer}
+			- artificial viscosity used for shock waves			
+		\subsection{Crater size}
+		- algorithm for finding highest particles that are part of the bulk
+		\subsection{Beta factor}
+		- correcting for self-gravity (?)
+	\section{Results}
+		\subsection{Crater size}
+		\subsection{Beta factor}
+	\section{Conclusion}
+	\section{Discussion}
+	
+	% References	
+	\newpage 
+	\printbibliography
+ 
+\end{document}
+
