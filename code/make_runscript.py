@@ -54,6 +54,10 @@ elif queueing_type == "local":
 else:
     raise ValueError("Unknown queueing type")
 
+f.write(
+    "## start in the folder of the shell script\n"
+    'cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"\n\n'
+)
 
 # check if folder with simulation name exists
 f.write(
@@ -78,7 +82,7 @@ f.write(
     f"if [ {testname} == 'test' ]; then\n"
     f"mkdir test && cd test\n"
     "else\n"
-    f"mkdir ../../data/{testname} && cd ../../data/{testname}\n"
+    f"pwd && mkdir ../../data/{testname} && cd ../../data/{testname}\n"
     "fi\n"
     f"cp ../../code/impact.0000 ../../code/materials/material_{testname}.cfg "
     f"../../code/materials/ANEOS.basaltm.table ../../code/miluphcuda ../../code/weibull ../../data_analysis/create_xdmf.py .\n\n"
