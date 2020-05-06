@@ -16,6 +16,8 @@ time_output = args.t
 
 # open and thereby name runscript
 filename = "run_" + queueing_type + "_" + testname + ".sh"
+if testname != "test":
+    filename = "runscripts/" + filename
 f = open(filename, "w")
 
 # sbatch script format for kamino and endor
@@ -46,35 +48,39 @@ elif queueing_type == "pbs":
 # no head
 elif queueing_type == "local":
     pass
-
 else:
     raise ValueError("Unknown queueing type")
+
+
+# check if folder with simulation name exists
+f.write(
+    "## Checking for simulation folder\n"
+    f"if [ {testname} == 'test' ]; then\n"
+    f"rm -rf test;\n"
+    f"elif [ -d ../../data/{testname} ]; then\n"
+    f"echo 'Directory {testname} already exists in /data!'; exit 1;\n"
+    "fi\n\n"
+)
 
 # Create material_test.cfg in case of default testname
 if testname == "test":
     f.write(
-        "## Creating test file from default\n"
-        f"cp material.cfg material_{testname}.cfg\n\n"
+        "## Creating material.cfg  testfile from default\n"
+        f"cp materials/material.cfg materials/material_test.cfg\n\n"
     )
-
-# check if folder with simulation name exists
-f.write(
-    "## Checking simulation folder\n"
-    f"if [ {testname} == 'test' ]; then\n"
-    f"rm -rf test;\n"
-    "fi\n"
-    f"if [ -d {testname} ]; then\n"
-    f"echo 'Directory {testname} already exists!'; exit 1;\n"
-    "fi\n\n"
-)
 
 # create new folder for simulation
 f.write(
     "## Creating simulation folder\n"
-    f"mkdir {testname} && cd {testname}\n"
-    f"cp ../impact.0000 ../material_{testname}.cfg "
-    f"../ANEOS.basaltm.table ../miluphcuda ../weibull ../create_xdmf.py .\n\n"
+    f"if [ {testname} == 'test' ]; then\n"
+    f"mkdir test && cd test\n"
+    "else\n"
+    f"mkdir ../../data/{testname} && cd ../../data/{testname}\n"
+    "fi\n"
+    f"cp ../../code/impact.0000 ../../code/materials/material_{testname}.cfg "
+    f"../../code/materials/ANEOS.basaltm.table ../../code/miluphcuda ../../code/weibull ../../data_analysis/create_xdmf.py .\n\n"
 )
+
 
 # weibulling particles
 f.write(
