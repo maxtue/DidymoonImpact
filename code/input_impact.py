@@ -19,7 +19,7 @@ def main():
     shape_targ_sim = 1
     shape_targ_bound = 2
     shape_proj = 0
-    r_inner_targ = 0.9 * args.r  # - delta * 6  # target simulation radius
+    r_inner_targ = 1 * args.r  # - delta * 6  # target simulation radius
     r_outer_targ = args.r  # target boundary radius
     a_cube_proj = 1.0  # determines projectile size
     m_proj = 500.0  # impactor mass
