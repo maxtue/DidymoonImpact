@@ -3,12 +3,11 @@ import argparse
 import os
 from pathlib import Path
 
-
 # get command line arguments
 parser = argparse.ArgumentParser()
 parser.add_argument("-q", help="queueing type", default="local")
 parser.add_argument("-n", help="name of runscript", default="test")
-parser.add_argument("-o", help="number of output files", default=1)
+parser.add_argument("-o", help="number of output files", default=2)
 parser.add_argument("-t", help="real time between output files", default=0.001)
 args = parser.parse_args()
 queueing_type = args.q
@@ -85,7 +84,8 @@ f.write(
     f"pwd && mkdir ../../data/{testname} && cd ../../data/{testname}\n"
     "fi\n"
     f"cp ../../code/impact.0000 ../../code/materials/material_{testname}.cfg "
-    f"../../code/materials/ANEOS.basaltm.table ../../code/miluphcuda ../../code/weibull ../../data_analysis/create_xdmf.py .\n\n"
+    f"../../code/materials/ANEOS.basaltm.table ../../code/miluphcuda "
+    f"../../code/weibull ../../data_analysis/create_xdmf.py .\n\n"
 )
 
 
@@ -98,9 +98,10 @@ f.write(
 
 # Starting miluphcuda
 f.write(
-    f"## Starting miluphcuda\n./miluphcuda -v -H -f "
+    f"## Starting miluphcuda\n"
+    "./miluphcuda -v -H -f "
     f"impact_damage_{testname}.0000 -m material_{testname}.cfg -n {num_outputs} "
-    f"-t {time_output} -I rk2_adaptive -Q 1e-5 > output_{testname}.log 2> "
+    f"-t {time_output} > output_{testname}.log 2> "
     f"error_{testname}.log\n\n"
 )
 
@@ -112,7 +113,7 @@ f.write(
 )
 
 # close file and save ls for writing times of output files
-f.write("## Saving ls output with writing-times of files\n" "ls -ltrh > ls_output.log")
+f.write("## Saving ls output with times of files\n" "ls -ltrh > ls_output.log")
 f.close()
 
 # make file executable
