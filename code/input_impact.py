@@ -37,7 +37,7 @@ def main():
     z_targ_start = -r_outer_targ
     z_targ_stop = r_outer_targ
     x_proj_start = dist_targ_proj
-    x_proj_stop = dist_targ_proj + 0.5 * delta  # a_cube_proj
+    x_proj_stop = dist_targ_proj + a_cube_proj
     y_proj_start = -0.5 * a_cube_proj
     y_proj_stop = 0.5 * a_cube_proj
     z_proj_start = -0.5 * a_cube_proj
@@ -88,7 +88,7 @@ def main():
         z_proj_start,
         z_proj_stop,
     )
-    # mass_proj = 500.0 / n_proj  # total projectile mass by number of
+    mass_proj = m_proj / n_proj  # total projectile mass by number of
     # particles
 
     # open file to write data into
@@ -421,6 +421,5 @@ def parse():
     )
     args = parser.parse_args()
     return args
-
 
 main()
