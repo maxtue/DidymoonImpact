@@ -1,11 +1,10 @@
 # Project specific
 data/
 .vscode/
-test*
+*test*
 .DS_Store
 miluphcuda
 impact.0000
-material_test.cfg
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
