@@ -16,10 +16,10 @@ num_outputs = args.o
 time_output = args.t
 
 # open and thereby name runscript
-filename = "start_" + queueing_type + "_" + testname + ".sh"
+filename = "run_" + queueing_type + "_" + testname + ".sh"
 if testname != "test":
-    Path("runscripts/").mkdir(parents=True, exist_ok=True)
-    filename = "runscripts/" + filename
+    Path("parameterstudy_runscripts/").mkdir(parents=True, exist_ok=True)
+    filename = "parameterstudy_runscripts/" + filename
 f = open(filename, "w")
 
 # sbatch script format for kamino and endor
@@ -87,7 +87,6 @@ f.write(
     f"../../code/materials/ANEOS.basaltm.table ../../code/miluphcuda "
     f"../../code/weibull ../../data_analysis/create_xdmf.py .\n\n"
 )
-
 
 # weibulling particles
 f.write(
