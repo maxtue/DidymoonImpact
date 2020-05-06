@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import argparse
 import os
+from pathlib import Path
+
 
 # get command line arguments
 parser = argparse.ArgumentParser()
@@ -15,8 +17,9 @@ num_outputs = args.o
 time_output = args.t
 
 # open and thereby name runscript
-filename = "run_" + queueing_type + "_" + testname + ".sh"
+filename = "start_" + queueing_type + "_" + testname + ".sh"
 if testname != "test":
+    Path("runscripts/").mkdir(parents=True, exist_ok=True)
     filename = "runscripts/" + filename
 f = open(filename, "w")
 
