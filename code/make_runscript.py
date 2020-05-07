@@ -72,7 +72,7 @@ f.write(
 if testname == "test":
     f.write(
         "## Creating material.cfg  testfile from default\n"
-        f"cp materials/material.cfg materials/material_test.cfg\n\n"
+        f"cp config_files/material.cfg config_files/material_test.cfg\n\n"
     )
 
 # create new folder for simulation
@@ -83,8 +83,8 @@ f.write(
     "else\n"
     f"pwd && mkdir ../../data/{testname} && cd ../../data/{testname}\n"
     "fi\n"
-    f"cp ../../code/impact.0000 ../../code/materials/material_{testname}.cfg "
-    f"../../code/materials/ANEOS.basaltm.table ../../code/miluphcuda "
+    f"cp ../../code/impact.0000 ../../code/config_files/material_{testname}.cfg "
+    f"../../code/config_files/ANEOS.basaltm.table ../../code/miluphcuda "
     f"../../code/weibull ../../data_analysis/create_xdmf.py .\n\n"
 )
 
