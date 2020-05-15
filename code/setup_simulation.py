@@ -30,9 +30,9 @@ f = open(filename, "w")
 
 # sbatch script format for kamino and endor
 if queueing_type == "sbatch":
-    # head of sbatch scripts
     f.write(
         "#!/bin/bash\n"
+        "set -e\n\n"
         "#SBATCH --partition=gpu\n"
         f"#SBATCH -J {testname}\n"
         "#SBATCH --gres=gpu:1\n"
@@ -41,9 +41,9 @@ if queueing_type == "sbatch":
 
 # pbs script format for binac
 elif queueing_type == "pbs":
-    # head of pbs scripts
     f.write(
         "#!/usr/bin/env bash\n"
+        "set -e\n\n"
         "#PBS -l walltime=720:00:00\n"
         "#PBS -l nodes=1:ppn=1:gpus=1:exclusive_process\n"
         "#PBS -q gpu\n\n"
