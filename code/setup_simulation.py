@@ -8,12 +8,18 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-q", help="queueing type", default="local")
 parser.add_argument("-n", help="name of runscript", default="test")
 parser.add_argument("-s", help="number of output steps", default=1)
-parser.add_argument("-t", help="real time between output files", default=0.001)
+parser.add_argument("-t", help="real time of one step", default=0.0001)
+parser.add_argument("-a", help="impact angle", default=0.0)
+parser.add_argument("-y", help="target strength", default=1e3)
+parser.add_argument("-p", help="target porosity", default=0.5)
 args = parser.parse_args()
 queueing_type = args.q
 testname = args.n
-num_outputs = args.o
-time_output = args.t
+num_steps = args.s
+step_time = args.t
+angle = args.a
+strength = args.y
+porosity = args.p
 
 # open and thereby name runscript
 filename = "run_" + queueing_type + "_" + testname + ".sh"
@@ -54,11 +60,10 @@ else:
     raise ValueError("Unknown queueing type")
 
 f.write(
-    "## start in the folder of the shell script\n"
+    "## Starting in the folder of the shell script\n"
     'cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"\n\n'
 )
 
-# check if folder with simulation name exists
 f.write(
     "## Checking for simulation folder\n"
     f"if [ {testname} == 'test' ]; then\n"
@@ -68,51 +73,54 @@ f.write(
     "fi\n\n"
 )
 
-# Create material_test.cfg in case of default testname
-if testname == "test":
-    f.write(
-        "## Creating material.cfg  testfile from default\n"
-        f"cp config_files/material.cfg config_files/material_test.cfg\n\n"
-    )
-
-# create new folder for simulation
 f.write(
     "## Creating simulation folder\n"
     f"if [ {testname} == 'test' ]; then\n"
     f"mkdir test && cd test\n"
     "else\n"
     f"pwd && mkdir ../../data/{testname} && cd ../../data/{testname}\n"
-    "fi\n"
-    f"cp ../../code/impact.0000 ../../code/config_files/material_{testname}.cfg "
+    "fi\n\n"
+)
+
+f.write(
+    "## Creating initial input file\n"
+    f"python ../../code/create_initial.py -a {angle} -p {porosity}\n\n"
+)
+
+f.write(
+    "## Creating material.cfg testfile\n"
+    f"python ../../code/create_material.py -y {strength}\n\n"
+)
+
+f.write(
+    "## Copying files into simulation folder\n"
+    f"cp ../../code/config_files/material_{testname}.cfg "
     f"../../code/config_files/ANEOS.basaltm.table ../../code/miluphcuda "
     f"../../code/weibull ../../data_analysis/create_xdmf.py .\n\n"
 )
 
-# weibulling particles
 f.write(
     "## Assigning flaws to particles according to weibull distribution\n"
     "./weibull -v -k 1e61 -m 16.0 -P -f impact.0000 -o "
     f"impact_damage_{testname}.0000 -n `wc -l impact.0000` -t 0\n\n"
 )
 
-# Starting miluphcuda
 f.write(
     f"## Starting miluphcuda\n"
     "./miluphcuda -v -H -f "
-    f"impact_damage_{testname}.0000 -m material_{testname}.cfg -n {num_outputs} "
-    f"-t {time_output} > output_{testname}.log 2> "
+    f"impact_damage_{testname}.0000 -m material_{testname}.cfg -n {num_steps} "
+    f"-t {step_time} > output_{testname}.log 2> "
     f"error_{testname}.log\n\n"
 )
 
-# creating xdmf for paraview
 f.write(
     "## Creating xdmf from h5 files\n"
     f"./create_xdmf.py --input impact_damage_{testname}.*.h5 "
     f"--output parav_impact_damage_{testname}.xdmf\n\n"
 )
 
-# close file and save ls for writing times of output files
-f.write("## Saving ls output with times of files\n" "ls -ltrh > ls_output.log")
+f.write("## Saving ls output with times of files\n" "ls -ltrh > ls_output.log\n")
+
 f.close()
 
 # make file executable
