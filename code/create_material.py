@@ -22,7 +22,7 @@ f.write(
             type = 5;
             shear_modulus = 22.7e9;
             bulk_modulus = 26.7e9;
-            yield_stress = {strength};
+            yield_stress = 3.5e9;
             rho_limit = 0.95
             till_rho_0 = 2.86e3
             till_A = 26.7e9
@@ -46,7 +46,7 @@ f.write(
                 crushcurve_style = 0;
                     W_M = 16.0
                     W_K = 1e61
-                    cohesion = 1.0e6
+                    cohesion = {strength}
                     friction_angle = 0.9827937232
                     friction_angle_damaged = 0.5404195003
         }};
@@ -63,7 +63,7 @@ f.write(
             type = 5;
             shear_modulus = 22.7e9;
             bulk_modulus = 26.7e9;
-            yield_stress = {strength};
+            yield_stress = 3.5e9;
             rho_limit = 0.95
             till_rho_0 = 2.86e3
             till_A = 26.7e9
@@ -87,7 +87,7 @@ f.write(
                 crushcurve_style = 0;
                     W_M = 16.0
                     W_K = 1e61
-                    cohesion = 1.0e6
+                    cohesion = {strength}
                     friction_angle = 0.9827937232
                     friction_angle_damaged = 0.5404195003
         }};
