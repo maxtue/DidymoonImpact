@@ -7,7 +7,7 @@ from pathlib import Path
 parser = argparse.ArgumentParser()
 parser.add_argument("-q", help="queueing type", default="local")
 parser.add_argument("-n", help="name of runscript", default="test")
-parser.add_argument("-o", help="number of output files", default=2)
+parser.add_argument("-s", help="number of output steps", default=1)
 parser.add_argument("-t", help="real time between output files", default=0.001)
 args = parser.parse_args()
 queueing_type = args.q
