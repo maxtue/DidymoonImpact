@@ -55,7 +55,7 @@ elif queueing_type == "pbs":
 
 # no head
 elif queueing_type == "local":
-    pass
+    f.write("#!/bin/bash\n" "set -e\n\n")
 else:
     raise ValueError("Unknown queueing type")
 
