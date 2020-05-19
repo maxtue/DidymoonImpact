@@ -94,8 +94,7 @@ f.write(
 
 f.write(
     "## Copying files into simulation folder\n"
-    f"cp ../../code/config_files/material_{testname}.cfg "
-    f"../../code/config_files/ANEOS.basaltm.table ../../code/miluphcuda "
+    f"cp ../../code/config_files/ANEOS.basaltm.table ../../code/miluphcuda "
     f"../../code/weibull ../../data_analysis/create_xdmf.py .\n\n"
 )
 
@@ -108,7 +107,7 @@ f.write(
 f.write(
     f"## Starting miluphcuda\n"
     "./miluphcuda -v -H -f "
-    f"impact_damage_{testname}.0000 -m material_{testname}.cfg -n {num_steps} "
+    f"impact_damage_{testname}.0000 -m material.cfg -n {num_steps} "
     f"-t {step_time} > output_{testname}.log 2> "
     f"error_{testname}.log\n\n"
 )
