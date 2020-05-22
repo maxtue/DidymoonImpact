@@ -84,12 +84,12 @@ f.write(
 
 f.write(
     "## Creating initial input file\n"
-    f"python ../../code/create_initial.py -a {angle} -p {porosity}\n\n"
+    f"python3 ../../code/create_initial.py -a {angle} -p {porosity}\n\n"
 )
 
 f.write(
     "## Creating material.cfg testfile\n"
-    f"python ../../code/create_material.py -y {strength}\n\n"
+    f"python3 ../../code/create_material.py -y {strength}\n\n"
 )
 
 f.write(
