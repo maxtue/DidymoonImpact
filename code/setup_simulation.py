@@ -78,7 +78,7 @@ f.write(
     f"if [ {testname} == 'test' ]; then\n"
     f"mkdir test && cd test\n"
     "else\n"
-    f"pwd && mkdir ../../data/{testname} && cd ../../data/{testname}\n"
+    f"mkdir ../../data/{testname} && cd ../../data/{testname}\n"
     "fi\n\n"
 )
 
