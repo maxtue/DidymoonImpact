@@ -116,6 +116,9 @@ f.write(
             till_b = 1.63
             till_alpha = 5.0
             till_beta = 5.0
+                cohesion = 1e9
+                friction_angle = 0.0
+                friction_angle_damaged = 0.0
         }};
     }}
     );
