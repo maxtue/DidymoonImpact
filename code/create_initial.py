@@ -37,11 +37,11 @@ def main():
     z_targ_start = -r_outer_targ
     z_targ_stop = r_outer_targ
     x_proj_start = dist_targ_proj
-    x_proj_stop = dist_targ_proj + a_cube_proj
-    y_proj_start = -0.5 * a_cube_proj
-    y_proj_stop = 0.5 * a_cube_proj
-    z_proj_start = -0.5 * a_cube_proj
-    z_proj_stop = 0.5 * a_cube_proj
+    x_proj_stop = dist_targ_proj  # + a_cube_proj
+    y_proj_start = 0  # -0.5 * a_cube_proj
+    y_proj_stop = 0  # 0.5 * a_cube_proj
+    z_proj_start = 0  # -0.5 * a_cube_proj
+    z_proj_stop = 0  # 0.5 * a_cube_proj
 
     # dynamics
     vx_targ = 0
