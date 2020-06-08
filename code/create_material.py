@@ -14,8 +14,9 @@ f.write(
     {{
         ID = 0;
         name = "Aluminium alloy 6061 (Tillotson)";
-        sml = 0.78;
         interactions = 30;
+        factor_sml_min = 0.1;
+        factor_sml_max = 10.0;
         artificial_viscosity = {{ alpha = 1.0; beta = 2.0; }};
         eos =
         {{
@@ -43,8 +44,9 @@ f.write(
     {{
         ID = 1;
         name = "Basalt Nakamura porous (Tillotson)";
-        sml = 0.78;
         interactions = 30;
+        factor_sml_min = 0.1;
+        factor_sml_max = 10.0;
         artificial_viscosity = {{ alpha = 1.0; beta = 2.0; }};
         eos =
         {{
