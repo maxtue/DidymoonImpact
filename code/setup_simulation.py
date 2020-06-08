@@ -67,7 +67,7 @@ f.write(
 f.write(
     "## Checking for simulation folder\n"
     f"if [ {testname} == 'test' ]; then\n"
-    f"rm -rf test;\n"
+    "rm -rf test;\n"
     f"elif [ -d ../../data/{testname} ]; then\n"
     f"echo 'Directory {testname} already exists in /data!'; exit 1;\n"
     "fi\n\n"
@@ -76,7 +76,7 @@ f.write(
 f.write(
     "## Creating simulation folder\n"
     f"if [ {testname} == 'test' ]; then\n"
-    f"mkdir test && cd test\n"
+    "mkdir test && cd test\n"
     "else\n"
     f"mkdir ../../data/{testname} && cd ../../data/{testname}\n"
     "fi\n\n"
@@ -84,7 +84,8 @@ f.write(
 
 f.write(
     "## Creating initial input file\n"
-    f"python3 ../../code/create_initial.py -a {angle} -p {porosity}\n\n"
+    f"#python3 ../../code/create_initial.py -a {angle} -p {porosity}\n\n"
+    f"cp ../impact.0000 impact_{testname}.0000\n\n"
 )
 
 f.write(
@@ -94,28 +95,18 @@ f.write(
 
 f.write(
     "## Copying files into simulation folder\n"
-    f"cp ../../code/config_files/ANEOS.basaltm.table ../../code/miluphcuda "
-    f"../../code/weibull ../../data_analysis/create_xdmf.py .\n\n"
+    "cp ../../code/config_files/ANEOS.basaltm.table ../../code/miluphcuda ../../data_analysis/create_xdmf.py .\n\n"
 )
 
-f.write(
-    "## Assigning flaws to particles according to weibull distribution\n"
-    "./weibull -v -k 1e61 -m 16.0 -P -f impact.0000 -o "
-    f"impact_damage_{testname}.0000 -n `wc -l impact.0000` -t 0\n\n"
-)
 
 f.write(
-    f"## Starting miluphcuda\n"
-    "./miluphcuda -v -H -f "
-    f"impact_damage_{testname}.0000 -m material.cfg -n {num_steps} "
-    f"-t {step_time} > output_{testname}.log 2> "
-    f"error_{testname}.log\n\n"
+    "## Starting miluphcuda\n"
+    f"./miluphcuda -v -H -f impact_{testname}.0000 -m material.cfg -n {num_steps} -t {step_time} > output_{testname}.log 2> error_{testname}.log\n\n"
 )
 
 f.write(
     "## Creating xdmf from h5 files\n"
-    f"./create_xdmf.py --input impact_damage_{testname}.*.h5 "
-    f"--output parav_impact_damage_{testname}.xdmf\n\n"
+    f"./create_xdmf.py --input impact_{testname}.*.h5 --output parav_impact_{testname}.xdmf\n\n"
 )
 
 f.write("## Saving ls output with times of files\n" "ls -ltrh > ls_output.log\n")
