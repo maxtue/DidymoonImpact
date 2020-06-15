@@ -85,7 +85,7 @@ f.write(
 f.write(
     "## Creating initial input file\n"
     f"#python3 ../../code/create_initial.py -a {angle} -p {porosity}\n\n"
-    f"cp ../impact.0000 impact_{testname}.0000\n\n"
+    f"cp ../../code/impact.0000 impact_{testname}.0000\n\n"
 )
 
 f.write(
