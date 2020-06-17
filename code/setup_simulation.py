@@ -5,42 +5,39 @@ from pathlib import Path
 
 # get command line arguments
 parser = argparse.ArgumentParser()
-parser.add_argument("-q", help="queueing type", default="local")
-parser.add_argument("-n", help="name of runscript", default="test")
-parser.add_argument("-s", help="number of output steps", default=300)
-parser.add_argument("-t", help="real time of one step", default=0.0001)
-parser.add_argument("-a", help="impact angle", default=0.0)
-parser.add_argument("-y", help="target strength", default=1e3)
-parser.add_argument("-p", help="target porosity", default=0.5)
+parser.add_argument("--queue", help="queueing type", default="local")
+parser.add_argument("--name", help="name of runscript", default="test")
+parser.add_argument("--steps", help="number of output steps", default=300)
+parser.add_argument("--time", help="real time of one step", default=0.0001)
+parser.add_argument(
+    "--particles", help="desired number of target particles", default=30000
+)
+parser.add_argument("--angle", help="impact angle", default=0.0)
+parser.add_argument("--strength", help="target strength", default=1e3)
+parser.add_argument("--porosity", help="target porosity", default=0.5)
 args = parser.parse_args()
-queueing_type = args.q
-testname = args.n
-num_steps = args.s
-step_time = args.t
-angle = args.a
-strength = args.y
-porosity = args.p
+
 
 # open and thereby name runscript
-filename = "run_" + queueing_type + "_" + testname + ".sh"
-if testname != "test":
+filename = "run_" + args.queue + "_" + args.name + ".sh"
+if args.name != "test":
     Path("parameterstudy_runscripts/").mkdir(parents=True, exist_ok=True)
     filename = "parameterstudy_runscripts/" + filename
 f = open(filename, "w")
 
 # sbatch script format for kamino and endor
-if queueing_type == "sbatch":
+if args.queue == "sbatch":
     f.write(
         "#!/bin/bash\n"
         "set -e\n\n"
         "#SBATCH --partition=gpu\n"
-        f"#SBATCH -J {testname}\n"
+        f"#SBATCH -J {args.name}\n"
         "#SBATCH --gres=gpu:1\n"
         "#SBATCH --time=07-00\n\n"
     )
 
 # pbs script format for binac
-elif queueing_type == "pbs":
+elif args.queue == "pbs":
     f.write(
         "#!/usr/bin/env bash\n"
         "set -e\n\n"
@@ -54,7 +51,7 @@ elif queueing_type == "pbs":
     )
 
 # no head
-elif queueing_type == "local":
+elif args.queue == "local":
     f.write("#!/bin/bash\n" "set -e\n\n")
 else:
     raise ValueError("Unknown queueing type")
@@ -63,31 +60,31 @@ f.write("## Starting in the folder of the shell script\n" 'cd "$(dirname "$0")"\
 
 f.write(
     "## Checking for simulation folder\n"
-    f"if [ {testname} == 'test' ]; then\n"
+    f"if [ {args.name} == 'test' ]; then\n"
     "rm -rf test;\n"
-    f"elif [ -d ../../data/{testname} ]; then\n"
-    f"echo 'Directory {testname} already exists in /data!'; exit 1;\n"
+    f"elif [ -d ../../data/{args.name} ]; then\n"
+    f"echo 'Directory {args.name} already exists in /data!'; exit 1;\n"
     "fi\n\n"
 )
 
 f.write(
     "## Creating simulation folder\n"
-    f"if [ {testname} == 'test' ]; then\n"
+    f"if [ {args.name} == 'test' ]; then\n"
     "mkdir test && cd test\n"
     "else\n"
-    f"mkdir -p ../../data/{testname} && cd ../../data/{testname}\n"
+    f"mkdir -p ../../data/{args.name} && cd ../../data/{args.name}\n"
     "fi\n\n"
 )
 
 f.write(
     "## Creating initial input file\n"
-    f"python3 ../../../impact_ini/impact_ini.py --outfile impact_{testname}.0000 --angle {angle} --sml_fact 2.1 --weibull_m 16.0 --weibull_k 1e61 --damage 0.0 --stress 0.0 --alpha_proj 1.0 --alpha_targ {porosity} --pressure 0.0\n\n"
-    f"#cp ../../code/impact.0000 impact_{testname}.0000\n\n"
+    f"python3 ../../../impact_ini/impact_ini.py --outfile impact_{args.name}.0000 --N_targ_des --angle {args.angle} --alpha_targ {args.porosity} --sml_fact 2.1 --weibull_m 16.0 --weibull_k 1e61 --damage 0.0 --stress 0.0 --alpha_proj 1.0 --pressure 0.0\n\n"
+    f"#cp ../../code/impact.0000 impact_{args.name}.0000\n\n"
 )
 
 f.write(
     "## Creating material.cfg testfile\n"
-    f"python3 ../../code/create_material.py -y {strength}\n\n"
+    f"python3 ../../code/create_material.py -y {args.strength}\n\n"
 )
 
 f.write(
@@ -97,12 +94,12 @@ f.write(
 
 f.write(
     "## Starting miluphcuda\n"
-    f"./miluphcuda -v -H -f impact_{testname}.0000 -m material.cfg -n {num_steps} -t {step_time} > output_{testname}.log 2> error_{testname}.log\n\n"
+    f"./miluphcuda -v -H -f impact_{args.name}.0000 -m material.cfg -n {args.steps} -t {args.time} > output_{args.name}.log 2> error_{args.name}.log\n\n"
 )
 
 f.write(
     "## Creating xdmf from h5 files\n"
-    f"./create_xdmf.py --input impact_{testname}.*.h5 --output parav_impact_{testname}.xdmf\n\n"
+    f"./create_xdmf.py --input impact_{args.name}.*.h5 --output parav_impact_{args.name}.xdmf\n\n"
 )
 
 f.write("## Saving ls output with times of files\n" "ls -ltrh > ls_output.log\n")
