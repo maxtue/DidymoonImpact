@@ -59,10 +59,7 @@ elif queueing_type == "local":
 else:
     raise ValueError("Unknown queueing type")
 
-f.write(
-    "## Starting in the folder of the shell script\n"
-    'cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"\n\n'
-)
+f.write("## Starting in the folder of the shell script\n" 'cd "$(dirname "$0")"\n\n')
 
 f.write(
     "## Checking for simulation folder\n"
@@ -84,8 +81,8 @@ f.write(
 
 f.write(
     "## Creating initial input file\n"
-    f"#python3 ../../code/create_initial.py -a {angle} -p {porosity}\n\n"
-    f"cp ../../code/impact.0000 impact_{testname}.0000\n\n"
+    f"python3 ../../../impact_ini/impact_ini.py --outfile impact_{testname}.0000 --angle {angle} --sml_fact 2.1 --weibull_m 16.0 --weibull_k 1e61 --damage 0.0 --stress 0.0 --alpha_proj 1.0 --alpha_targ {porosity} --pressure 0.0\n\n"
+    f"#cp ../../code/impact.0000 impact_{testname}.0000\n\n"
 )
 
 f.write(
@@ -95,9 +92,8 @@ f.write(
 
 f.write(
     "## Copying files into simulation folder\n"
-    "cp ../../code/config_files/ANEOS.basaltm.table ../../code/miluphcuda ../../data_analysis/create_xdmf.py .\n\n"
+    "cp ../../../miluphcuda/miluphcuda ../../data_analysis/create_xdmf.py .\n\n"
 )
-
 
 f.write(
     "## Starting miluphcuda\n"
