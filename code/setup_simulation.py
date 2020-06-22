@@ -9,7 +9,9 @@ parser.add_argument("--queue", help="queueing type", default="local")
 parser.add_argument("--name", help="name of runscript", default="test")
 parser.add_argument("--steps", help="number of output steps", default=300)
 parser.add_argument("--time", help="real time of one step", default=0.0001)
-parser.add_argument("--particles", help="desired number of target particles", default=30000)
+parser.add_argument(
+    "--particles", help="desired number of target particles", default=30000
+)
 parser.add_argument("--angle", help="impact angle", default=0.0, type=float)
 parser.add_argument("--strength", help="target strength", default=1e3, type=float)
 parser.add_argument("--porosity", help="target porosity", default=0.5, type=float)
@@ -76,11 +78,14 @@ f.write(
 
 f.write(
     "## Creating initial input file\n"
-    f"python3 ../../../impact_ini/impact_ini.py --outfile impact_{args.name}.0000 --N_targ_des {args.particles} --angle {args.angle} --alpha_targ {1.0 / (1.0 - args.porosity)} --sml_fact 2.1 --weibull_m 16.0 --weibull_k 1e61 --damage 0.0 --stress 0.0 --alpha_proj 1.0 --pressure 0.0\n\n"
+    f"python3 ../../../impact_ini/impact_ini.py --outfile impact_{args.name}.0000 --N_targ_des {args.particles} --angle {args.angle} --alpha_targ {1.0 / (1.0 - args.porosity)} --output_format 'SOLIDPOROUS' --sml_fact 2.1 --weibull_m 16.0 --weibull_k 1e61 --damage 0.0 --stress 0.0 --alpha_proj 1.0 --pressure 0.0\n\n"
     f"#cp ../../code/impact.0000 impact_{args.name}.0000\n\n"
 )
 
-f.write("## Creating material.cfg testfile\n" f"python3 ../../code/create_material.py -y {args.strength}\n\n")
+f.write(
+    "## Creating material.cfg testfile\n"
+    f"python3 ../../code/create_material.py -y {args.strength}\n\n"
+)
 
 f.write(
     "## Copying files into simulation folder\n"
@@ -92,12 +97,12 @@ f.write(
     f"./miluphcuda -v -H -f impact_{args.name}.0000 -m material.cfg -n {args.steps} -t {args.time} > output_{args.name}.log 2> error_{args.name}.log\n\n"
 )
 
+f.write("## Saving ls output with times of files\n" "ls -ltrh > ls_output.log\n")
+
 f.write(
     "## Creating xdmf from h5 files\n"
     f"./create_xdmf.py --input impact_{args.name}.*.h5 --output parav_impact_{args.name}.xdmf\n\n"
 )
-
-f.write("## Saving ls output with times of files\n" "ls -ltrh > ls_output.log\n")
 
 f.close()
 
