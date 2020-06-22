@@ -50,7 +50,7 @@ f.write(
         artificial_viscosity = {{ alpha = 1.0; beta = 2.0; }};
         eos =
         {{
-            type = 2;
+            type = 5;
             shear_modulus = 22.7e9;
             bulk_modulus = 26.7e9;
             yield_stress = 3.5e9;
