@@ -10,7 +10,7 @@ parser.add_argument("--name", help="name of runscript", default="test")
 parser.add_argument("--steps", help="number of output steps", default=300)
 parser.add_argument("--time", help="real time of one step", default=0.0001)
 parser.add_argument(
-    "--particles", help="desired number of target particles", default=30000
+    "--particles", help="desired number of target particles", default=300000
 )
 parser.add_argument("--angle", help="impact angle", default=0.0, type=float)
 parser.add_argument("--strength", help="target strength", default=1e3, type=float)
