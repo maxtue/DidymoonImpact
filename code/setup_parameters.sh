@@ -1,7 +1,7 @@
 ## create setups with different parameters
-for porosity in 0 0.25 0.5 0.75
+for porosity in 0.0 0.25 0.5 0.75
 do
-    for strength in 1e3 1e4 1e5 1e6 
+    for strength in 1e3 1e4 1e5 1e6
     do
         for angle in 0 15 30 45
         do
