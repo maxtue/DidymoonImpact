@@ -5,7 +5,7 @@ do
     do
         for angle in 0 45
         do
-            python3 setup_simulation.py --porosity $porosity --strength $strength --angle $angle --name "por${porosity}_str${strength}_ang${angle}"
+            python3 setup_simulation.py --queue pbs --porosity $porosity --strength $strength --angle $angle --name "por${porosity}_str${strength}_ang${angle}"
         done
     done
 done
