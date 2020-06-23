@@ -9,9 +9,6 @@ parser.add_argument("--queue", help="queueing type", default="local")
 parser.add_argument("--name", help="name of runscript", default="test")
 parser.add_argument("--steps", help="number of output steps", default=300)
 parser.add_argument("--time", help="real time of one step", default=0.0001)
-parser.add_argument(
-    "--particles", help="desired number of target particles", default=300000
-)
 parser.add_argument("--angle", help="impact angle", default=0.0, type=float)
 parser.add_argument("--strength", help="target strength", default=1e3, type=float)
 parser.add_argument("--porosity", help="target porosity", default=0.5, type=float)
@@ -78,7 +75,8 @@ f.write(
 
 f.write(
     "## Creating initial input file\n"
-    f"python3 ../../../impact_ini/impact_ini.py --outfile impact_{args.name}.0000 --N_targ_des {args.particles} --angle {args.angle} --alpha_targ {1.0 / (1.0 - args.porosity)} --output_format 'SOLIDPOROUS' --R_proj 0.36 --sml_fact 2.1 --weibull_m 16.0 --weibull_k 1e61 --damage 0.0 --stress 0.0 --alpha_proj 1.0 --pressure 0.0\n\n"
+    f"##python3 ../../../impact_ini/impact_ini.py --outfile impact_{args.name}.0000 --angle {args.angle} --alpha_targ {1.0 / (1.0 - args.porosity)} --N_targ_des 300000 --R_targ 20.0 --R_targ_inner 5.0 --distance 5.0 --output_format 'SOLIDPOROUS' --R_proj 0.36 --sml_fact 2.1 --weibull_m 16.0 --weibull_k 1e61 --damage 0.0 --stress 0.0 --alpha_proj 1.0 --pressure 0.0\n\n"
+    f"python3 ../../../impact_ini/impact_ini.py --outfile impact_{args.name}.0000 --angle {args.angle} --alpha_targ {1.0 / (1.0 - args.porosity)} --N_targ_des 30000 --R_targ 10.0 --R_targ_inner 1.0 --distance 2.5 --output_format 'SOLIDPOROUS' --R_proj 0.36 --sml_fact 2.1 --weibull_m 16.0 --weibull_k 1e61 --damage 0.0 --stress 0.0 --alpha_proj 1.0 --pressure 0.0\n\n"
     f"#cp ../../code/impact.0000 impact_{args.name}.0000\n\n"
 )
 
