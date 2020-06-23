@@ -42,7 +42,6 @@ elif args.queue == "pbs":
         "#PBS -l nodes=1:ppn=1:gpus=1:exclusive_process\n"
         "#PBS -q gpu\n\n"
         "cd $PBS_O_WORKDIR\n"
-        "module load devel/cuda/10.0\n"
         "unset CUDA_VISIBLE_DEVICES\n"
         "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/local/lib\n\n"
     )
