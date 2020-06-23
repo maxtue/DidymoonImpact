@@ -38,6 +38,7 @@ elif args.queue == "pbs":
     f.write(
         "#!/usr/bin/env bash\n"
         "set -e\n\n"
+        "#PBS -M maximilian.rutz@student.uni-tuebingen.de\n"
         "#PBS -l walltime=720:00:00\n"
         "#PBS -l nodes=1:ppn=1:gpus=1:exclusive_process\n"
         "#PBS -q gpu\n\n"
