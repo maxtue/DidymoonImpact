@@ -37,9 +37,11 @@ if args.queue == "sbatch":
 elif args.queue == "pbs":
     f.write(
         "#!/usr/bin/env bash\n"
+	f"#PBS -N {args.name}"
+        "#PBS -e {args.name}_PBSerror"
         "#PBS -M maximilian.rutz@student.uni-tuebingen.de\n"
         "#PBS -l walltime=720:00:00\n"
-        "#PBS -l nodes=1:ppn=1:gpus=1:exclusive_process\n"
+        "#PBS -l nodes=1:ppn=1:gpus=1\n"
         "#PBS -q gpu\n\n"
         "set -e\n\n"
         "cd $PBS_O_WORKDIR\n"
