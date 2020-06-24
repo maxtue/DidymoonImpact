@@ -26,22 +26,22 @@ f = open(filename, "w")
 if args.queue == "sbatch":
     f.write(
         "#!/bin/bash\n"
-        "set -e\n\n"
         "#SBATCH --partition=gpu\n"
         f"#SBATCH -J {args.name}\n"
         "#SBATCH --gres=gpu:1\n"
         "#SBATCH --time=07-00\n\n"
+        "set -e\n\n"
     )
 
 # pbs script format for binac
 elif args.queue == "pbs":
     f.write(
         "#!/usr/bin/env bash\n"
-        "set -e\n\n"
         "#PBS -M maximilian.rutz@student.uni-tuebingen.de\n"
         "#PBS -l walltime=720:00:00\n"
         "#PBS -l nodes=1:ppn=1:gpus=1:exclusive_process\n"
         "#PBS -q gpu\n\n"
+        "set -e\n\n"
         "cd $PBS_O_WORKDIR\n"
         "unset CUDA_VISIBLE_DEVICES\n"
         "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/local/lib\n\n"
