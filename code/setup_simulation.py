@@ -37,14 +37,18 @@ if args.queue == "sbatch":
 elif args.queue == "pbs":
     f.write(
         "#!/usr/bin/env bash\n"
-	f"#PBS -N {args.name}"
-        "#PBS -e {args.name}_PBSerror"
+	f"#PBS -N {args.name}\n"
+        f"#PBS -o {args.name}_log\n"
+        f"#PBS -e {args.name}_error\n"
         "#PBS -M maximilian.rutz@student.uni-tuebingen.de\n"
         "#PBS -l walltime=720:00:00\n"
         "#PBS -l nodes=1:ppn=1:gpus=1\n"
         "#PBS -q gpu\n\n"
-        "set -e\n\n"
+        "set -e\n"
         "cd $PBS_O_WORKDIR\n"
+        "module load devel/cuda/10.1\n"
+        "module load lib/hdf5/1.8.16-gnu-4.9\n"
+        "module list\n"
         "unset CUDA_VISIBLE_DEVICES\n"
         "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/local/lib\n\n"
     )
@@ -55,7 +59,7 @@ elif args.queue == "local":
 else:
     raise ValueError("Unknown queueing type")
 
-f.write("## Starting in the folder of the shell script\n" 'cd "$(dirname "$0")"\n\n')
+#f.write("## Starting in the folder of the shell script\n" 'cd "$(dirname "$0"); pwd"\n\n')
 
 f.write(
     "## Checking for simulation folder\n"
