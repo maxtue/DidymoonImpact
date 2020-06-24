@@ -1,5 +1,5 @@
 ## create setups with different parameters
-for porosity in 0.0 0.17 0.33 0.5
+for porosity in 0 17 33 50
 do
     for strength in 1e3 1e4 1e5 1e6
     do
