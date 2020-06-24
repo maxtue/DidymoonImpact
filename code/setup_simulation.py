@@ -28,7 +28,6 @@ if args.queue == "sbatch":
         "#!/bin/bash\n"
         "#SBATCH --partition=gpu\n"
         f"#SBATCH -J {args.name}\n"
-        "#SBATCH --gres=gpu:1\n"
         "#SBATCH --time=07-00\n\n"
         "set -e\n\n"
     )
