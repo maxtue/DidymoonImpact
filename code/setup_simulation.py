@@ -82,7 +82,7 @@ f.write(
 
 f.write(
     "## Creating material.cfg testfile\n"
-    f"python3 ../../code/create_material.py -y {args.strength}\n\n"
+    f"python3 ../../code/create_material.py --strength {args.strength}\n\n"
 )
 
 f.write(

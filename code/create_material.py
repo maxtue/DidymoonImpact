@@ -2,9 +2,8 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-n", help="name of simulation run", default="test")
-parser.add_argument("-y", help="strength", default=1e3)
+parser.add_argument("--strength", help="cohesion strength of target", default=1e3)
 args = parser.parse_args()
-strength = args.y
 
 f = open("material.cfg", "w")
 
@@ -77,7 +76,7 @@ f.write(
                 crushcurve_style = 0;
                     W_M = 16.0
                     W_K = 1e61
-                    cohesion = {strength}
+                    cohesion = {args.strength}
                     friction_angle = 0.9827937232
                     friction_angle_damaged = 0.5404195003
         }};
