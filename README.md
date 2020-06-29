@@ -7,7 +7,7 @@ Can an asteroid coming for our earth be redirected by a satellite impact? To fin
 \
 Numerical simulations before the mission support its planning and execution. Many material properties of the Didymoon asteroid are unknown and the exact impact conditions might vary. This project simulates the outcome of the DART impact for different parameters.\
 \
-![](https://github.com/maxtue/DidymoonImpact/blob/master/MasterThesis/images/dart_impact.jpg)
+![](https://github.com/maxtue/DidymoonImpact/blob/master/MasterThesis/images/dart_mission.jpg)
 
 ## Tech used
 - All simulations were run with [miluphcuda](https://github.com/christophmschaefer/miluphcuda), a [Smoothed particle hydrodynamics](https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics) code capable of parallel computing on NVIDIA GPUs. 
