@@ -6,6 +6,8 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
+pylint = "*"
+black = "*"
 jupyter = "*"
 jupyter-contrib-nbextensions = "*"
 h5py = "*"
@@ -18,3 +20,6 @@ rise = "*"
 
 [requires]
 python_version = "*"
+
+[pipenv]
+allow_prereleases = true
