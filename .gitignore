@@ -8,6 +8,9 @@ miluphcuda
 impact.0000
 nohup.out
 parameterstudy_runscripts/
+images/
+videos/
+*.pdf
 
 ## LATEX
 ## Core latex/pdflatex auxiliary files:
