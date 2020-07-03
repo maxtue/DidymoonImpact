@@ -16,12 +16,12 @@ import pandas as pd
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="Calculates the betafactor of impact momentum transfer from a miluphcuda .h5 file. "
+        description="Calculates the betafactor of impact momentum transfer from a miluphcuda .h5 file."
     )
 
     parser.add_argument(
         "--file",
-        help="specify .h5 input file default is /scratch/share/sph/burger_run5_30deg/impact.0300.h5",
+        help="specify .h5 input file, default is /scratch/share/sph/burger_run5_30deg/impact.0300.h5",
         type=str,
         default="/scratch/share/sph/burger_run5_30deg/impact.0300.h5",
     )
@@ -32,9 +32,8 @@ def parse_args():
     return parser.parse_args()
 
 
-def betafactor(file="/scratch/share/sph/burger_run5_30deg/impact.0300.h5", ejecta_thresh=0.0):
+def betafactor(file, ejecta_thresh):
     # read data from miluphcuda .h5 file
-    file = "/scratch/share/sph/burger_run5_30deg/impact.0300.h5"
     with h5py.File(file, "r") as hdf:
         df = pd.DataFrame(
             {
@@ -73,6 +72,6 @@ def betafactor(file="/scratch/share/sph/burger_run5_30deg/impact.0300.h5", eject
     return beta
 
 
-if __name__ == "main":
-    args = parse_args
+if __name__ == "__main__":
+    args = parse_args()
     betafactor(file=args.file, ejecta_thresh=args.ejecta_thresh)
