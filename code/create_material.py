@@ -2,7 +2,9 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-n", help="name of simulation run", default="test")
-parser.add_argument("--strength", help="cohesion strength of target", default=1e3)
+parser.add_argument("--porosity", help="target porosity", default=0.5, type=float)
+parser.add_argument("--strength", help="target strength", default=1e3, type=float)
+
 args = parser.parse_args()
 
 f = open("material.cfg", "w")
@@ -67,7 +69,7 @@ f.write(
                 porjutzi_p_elastic = 1.0e6;
                 porjutzi_p_transition = 6.80e7;
                 porjutzi_p_compacted = 2.13e8;
-                porjutzi_alpha_0 = 2.0;
+                porjutzi_alpha_0 = {1.0 / (1.0 - args.porosity)};
                 porjutzi_alpha_e = 4.64;
                 porjutzi_alpha_t = 1.90;
                 porjutzi_n1 = 12.0;

@@ -10,8 +10,8 @@ parser.add_argument("--name", help="name of runscript", default="test")
 parser.add_argument("--steps", help="number of output steps", default=300)
 parser.add_argument("--time", help="real time of one step", default=0.0001)
 parser.add_argument("--angle", help="impact angle", default=0.0, type=float)
-parser.add_argument("--strength", help="target strength", default=1e3, type=float)
 parser.add_argument("--porosity", help="target porosity", default=0.5, type=float)
+parser.add_argument("--strength", help="target strength", default=1e3, type=float)
 args = parser.parse_args()
 
 
@@ -25,18 +25,14 @@ f = open(filename, "w")
 # sbatch script format for kamino and endor
 if args.queue == "sbatch":
     f.write(
-        "#!/bin/bash\n"
-        "#SBATCH --partition=gpu\n"
-        f"#SBATCH -J {args.name}\n"
-        "#SBATCH --time=07-00\n\n"
-        "set -e\n\n"
+        "#!/bin/bash\n" "#SBATCH --partition=gpu\n" f"#SBATCH -J {args.name}\n" "#SBATCH --time=07-00\n\n" "set -e\n\n"
     )
 
 # pbs script format for binac
 elif args.queue == "pbs":
     f.write(
         "#!/usr/bin/env bash\n"
-	f"#PBS -N {args.name}\n"
+        f"#PBS -N {args.name}\n"
         f"#PBS -o {args.name}_log\n"
         f"#PBS -e {args.name}_error\n"
         "#PBS -M maximilian.rutz@student.uni-tuebingen.de\n"
@@ -58,7 +54,7 @@ elif args.queue == "local":
 else:
     raise ValueError("Unknown queueing type")
 
-#f.write("## Starting in the folder of the shell script\n" 'cd "$(dirname "$0"); pwd"\n\n')
+# f.write("## Starting in the folder of the shell script\n" 'cd "$(dirname "$0"); pwd"\n\n')
 
 f.write(
     "## Checking for simulation folder\n"
@@ -87,7 +83,7 @@ f.write(
 
 f.write(
     "## Creating material.cfg testfile\n"
-    f"python3 ../../code/create_material.py --strength {args.strength}\n\n"
+    f"python3 ../../code/create_material.py --porosity {args.porosity} --strength {args.strength}\n\n"
 )
 
 f.write(
