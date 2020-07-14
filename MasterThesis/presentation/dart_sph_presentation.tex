@@ -6,8 +6,7 @@
 \usepackage{animate}
 \graphicspath{{../images/}{../videos/}{../videos/test/}}
 \usepackage{tikz}
-\usepackage{media9}
-\addmediapath{../videos/}
+
 
 
 \title{SPH simulations for space defense}
@@ -29,12 +28,40 @@
 		height=\paperheight]{dart_mission.jpg}};
 	\end{tikzpicture}
 \end{frame}
-
+\begin{frame}{Dart Mission}
+	\begin{itemize}
+		\item Launch in July 2021 on a SpaceX Falcon 9 \pause
+		\item Impact in fall 2022 \pause
+		\item 11 million kilometers distance to earth \pause
+		\item Observations with LICIACube and earth based telescopes
+	\end{itemize}
+\end{frame}
+\begin{frame}{Hera Mission}
+	\begin{tikzpicture}[remember picture,overlay]
+	\node[at=(current page.center)] {
+		\includegraphics[keepaspectratio,
+		width=\paperwidth,
+		height=\paperheight]{hera_mission.jpg}};
+	\end{tikzpicture}
+\end{frame}
+\begin{frame}{Hera Mission}
+	\begin{itemize}
+		\item Launch in 2024 \pause
+		\item Arrival in 2026 \pause
+		\item Why a second mission? \pause
+		\begin{itemize}
+			\item Dust cloud after impact \pause
+			\item Reduce uncertainty of orbital shift \pause
+			\item Politics ... \pause
+		\end{itemize}
+	\end{itemize}	
+\end{frame}
 \begin{frame}{Target}
-	Didymos 
+	https://www.nasa.gov/planetarydefense/dart
+	Dimorphos orbiting Didymos 
 \end{frame}
 \begin{frame}{Impactor}
-	DART 
+	https://dart.jhuapl.edu/Mission/Impactor-Spacecraft.php
 \end{frame}
 \section{SPH setup}
 \begin{frame}{SPH method}
@@ -81,11 +108,4 @@
 \end{frame}
 \begin{frame}{Conclusion}
 \end{frame}
-%\begin{frame}[plain]{The Chelyabinsk meteor 2013}
-%	\includemedia[
-%	activate=onclick,
-%	width=0.75\textwidth
-%	]{}{chelyabinsk.swf}
-%\end{frame}
-
 \end{document}
