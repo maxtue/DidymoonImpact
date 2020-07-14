@@ -29,10 +29,11 @@
 	\end{tikzpicture}
 \end{frame}
 \begin{frame}{Dart Mission}
+	%https://dart.jhuapl.edu/Gallery/media/graphics/lg/DART-infographic_v4.jpg
 	\begin{itemize}
 		\item Launch in July 2021 on a SpaceX Falcon 9 \pause
 		\item Impact in fall 2022 \pause
-		\item 11 million kilometers distance to earth \pause
+		\item Impact at ~0.07 au to Earth, ~29 Earth-Moon, ~1/5 Earth-Mars \pause
 		\item Observations with LICIACube and earth based telescopes
 	\end{itemize}
 \end{frame}
@@ -45,6 +46,7 @@
 	\end{tikzpicture}
 \end{frame}
 \begin{frame}{Hera Mission}
+%https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2018/06/testing_deflection/1%5359917-7-eng-GB/Testing_deflection_pillars.jpg
 	\begin{itemize}
 		\item Launch in 2024 \pause
 		\item Arrival in 2026 \pause
@@ -56,12 +58,23 @@
 		\end{itemize}
 	\end{itemize}	
 \end{frame}
+\begin{frame}
+	\begin{tikzpicture}[remember picture,overlay]
+		\node[at=(current page.center)] {
+		\includegraphics[keepaspectratio,
+		width=\paperwidth,
+		height=\paperheight]{asteroids_size.png}};
+	\end{tikzpicture}
+\end{frame}
 \begin{frame}{Target}
 	https://www.nasa.gov/planetarydefense/dart
+	
 	Dimorphos orbiting Didymos 
+	https://dart.jhuapl.edu/Gallery/media/graphics/lg/DART%20Coloring%20Page.png
 \end{frame}
 \begin{frame}{Impactor}
 	https://dart.jhuapl.edu/Mission/Impactor-Spacecraft.php
+	1.2 × 1.3 × 1.3 meters
 \end{frame}
 \section{SPH setup}
 \begin{frame}{SPH method}
@@ -100,7 +113,12 @@
 %	exemplary video
 %\end{frame}
 \begin{frame}{Comparision with grid codes}
-	Raducan
+	\begin{tikzpicture}[remember picture,overlay]
+\node[at=(current page.center)] {
+	\includegraphics[keepaspectratio,
+	width=\paperwidth,
+	height=\paperheight]{cratering_raducan.pdf}};
+\end{tikzpicture}
 \end{frame}
 
 \begin{frame}{Impact angle}
