@@ -4,10 +4,8 @@
 \setbeamercovered{transparent}
 \usepackage{graphicx}
 \usepackage{animate}
-\graphicspath{{../images/}{../videos/}{../videos/test/}}
+\graphicspath{{../images/}}
 \usepackage{tikz}
-
-
 
 \title{SPH simulations for space defense}
 \author{Maximilian Rutz}
@@ -33,7 +31,7 @@
 	\begin{itemize}
 		\item Launch in July 2021 on a SpaceX Falcon 9 \pause
 		\item Impact in fall 2022 \pause
-		\item Impact at ~0.07 au to Earth, ~29 Earth-Moon, ~1/5 Earth-Mars \pause
+		\item Impact at ~0.07 au to Earth, ~29x Earth-Moon, ~1/5x Earth-Mars \pause
 		\item Observations with LICIACube and earth based telescopes
 	\end{itemize}
 \end{frame}
@@ -91,7 +89,6 @@
 \begin{frame}{Miluphcuda setup}
 	\begin{itemize}
 		\item xˆ3 Kernel function \pause
-		\item artifical viscosity \pause
 		\item Runge Kutta fourth order \pause
 		\item no self gravity \pause
 		\item p-$\alpha$ porosity - micro vs macroporosity\pause
@@ -103,7 +100,7 @@
 		\item artifical viscosity \pause
 		\item Runge Kutta Fourth order \pause
 		\item no self gravity \pause
-		\item p-$\alpha$ porosity \pause
+		\item p-$\alpha$ porosity
 	\end{itemize}
 \end{frame}
 \begin{frame}{smoothing length}
@@ -111,6 +108,13 @@
 	- limit of sml -> 0 is normal hydrodynamics??
 \end{frame}
 \section{SPH results}
+\begin{frame}{Goal of simulations}
+Compare numerical results with observations to:
+	\begin{enumerate}
+		\item test numerical codes \pause
+		\item identify target material and properties
+	\end{enumerate}
+\end{frame}
 \begin{frame}{Beta factor}
 \end{frame}
 %\begin{frame}{Target porosity and strength}
@@ -119,7 +123,7 @@
 %\end{frame}
 \begin{frame}{Comparision with grid codes}
 	\begin{tikzpicture}[remember picture,overlay]
-\node[at=(current page.center)] {
+	\node[at=(current page.center)] {
 	\includegraphics[keepaspectratio,
 	width=\paperwidth,
 	height=\paperheight]{cratering_raducan.pdf}};
@@ -129,6 +133,13 @@
 \begin{frame}{Impact angle}
 	Not seen in 2d grid codes Raducan
 \end{frame}
-\begin{frame}{Conclusion}
+
+\begin{frame}{Philosophical observations about SPH}
+	\begin{itemize}
+	\item A lot of individual physics implementable 
+	\item Interaction between physical models within a code can get complex
+	\item A lot of different codes available 
+	\item A lot of parameters needed to reproduce results of others
+	\end{itemize}
 \end{frame}
 \end{document}
