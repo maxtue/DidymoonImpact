@@ -2,39 +2,54 @@
 \usetheme{Frankfurt}
 \setbeamertemplate{footline}[frame number]
 \setbeamercovered{transparent}
-\usepackage{graphicx}
-\usepackage{animate}
+\usepackage{graphicx,animate,tikz,amsmath}
 \graphicspath{{../images/}}
-\usepackage{tikz}
+
+
+\AtBeginSection[]{
+	\begin{frame}
+	\vfill
+	\centering
+	\begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+		\usebeamerfont{title}\insertsectionhead\par%
+	\end{beamercolorbox}
+	\vfill
+\end{frame}
+}
 
 \title{SPH simulations for space defense}
 \author{Maximilian Rutz}
 
 \begin{document}
+	
 \begin{frame}[plain]
     \maketitle
 \end{frame}
+
 \begin{frame}[plain]{Roadmap}
 \tableofcontents
 \end{frame}
-\section{Dart and Hera Missions}
+
+\section{Dart and Hera missions}
 \begin{frame}
 	\begin{tikzpicture}[remember picture,overlay]
-	\node[at=(current page.center)] {
+		\node[at=(current page.center)] {
 		\includegraphics[keepaspectratio,
 		width=\paperwidth,
 		height=\paperheight]{dart_mission.jpg}};
 	\end{tikzpicture}
 \end{frame}
+
 \begin{frame}{Dart Mission}
 	%https://dart.jhuapl.edu/Gallery/media/graphics/lg/DART-infographic_v4.jpg
 	\begin{itemize}
 		\item Launch in July 2021 on a SpaceX Falcon 9 \pause
 		\item Impact in fall 2022 \pause
-		\item Impact at ~0.07 au to Earth, ~29x Earth-Moon, ~1/5x Earth-Mars \pause
+		\item Impact at ~0.04 au to Earth, ~15x Earth-Moon, ~1/10x Earth-Mars \pause
 		\item Observations with LICIACube and earth based telescopes
 	\end{itemize}
 \end{frame}
+
 \begin{frame}{Hera Mission}
 	\begin{tikzpicture}[remember picture,overlay]
 	\node[at=(current page.center)] {
@@ -43,6 +58,7 @@
 		height=\paperheight]{hera_mission.jpg}};
 	\end{tikzpicture}
 \end{frame}
+
 \begin{frame}{Hera Mission}
 %https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2018/06/testing_deflection/1%5359917-7-eng-GB/Testing_deflection_pillars.jpg
 	\begin{itemize}
@@ -52,10 +68,11 @@
 		\begin{itemize}
 			\item Dust cloud after impact \pause
 			\item Reduce uncertainty of orbital shift \pause
-			\item Politics ... \pause
+			\item Politics \pause
 		\end{itemize}
 	\end{itemize}	
 \end{frame}
+
 \begin{frame}
 	\begin{tikzpicture}[remember picture,overlay]
 		\node[at=(current page.center)] {
@@ -63,37 +80,79 @@
 		width=\paperwidth,
 		height=\paperheight]{asteroids_size.png}};
 	\end{tikzpicture}
-\end{frame}
-\begin{frame}{Target}
-	typical representative of possible hazardious asteroid
-	https://www.nasa.gov/planetarydefense/dart
-	
-	Dimorphos orbiting Didymos 
-	https://dart.jhuapl.edu/Gallery/media/graphics/lg/DART%20Coloring%20Page.png
-\end{frame}
-\begin{frame}{Impactor}
-	https://dart.jhuapl.edu/Mission/Impactor-Spacecraft.php
-	\begin{itemize}
-	\item 1.2 × 1.3 × 1.3 meters \pause
-	\item artifical viscosity \pause
-	\end{itemize}
-	
-\end{frame}
+\end{frame}	
+
 \section{SPH setup}
-\begin{frame}{SPH method}
-	Smoothed particle hydrodynamics
+\begin{frame}{Simulation goals}
+Compare numerical results with observations to:
+\begin{enumerate}
+	\item test numerical codes \pause
+	\item identify target properties through parameter studies
+\end{enumerate}
 \end{frame}
-\begin{frame}{Miluphcuda}
-	Smoothed particle hydrodynamics
+
+\begin{frame}{Simulation scenario}
+Target:
+\begin{itemize}
+	\item 160 meter diameter \pause
+	\item important parameters such as porosity and strength unknown \pause
+\end{itemize} 
+Impactor:
+\begin{itemize}
+	\item 500 kg mass \pause
+	\item 6 km/s impact velocity \pause
+	\item main body 1.3 x 1.2 x 1.2 meter \pause
+\end{itemize} 
 \end{frame}
+
+\begin{frame}{Smoothed Particle Hydrodynamics}
+\begin{columns}
+	\begin{column}{0.55\textwidth}
+		\begin{itemize}
+			\item gridfree method
+			\item particles move through space with a velocity
+			\item particles carry physical quantities like density, pressure or energy
+			\item hydrodynamic equations can be solved for every particle
+		\end{itemize}
+	\end{column}
+	\begin{column}{0.4\textwidth}
+	\vspace{\topsep}	
+	\includegraphics[width=\columnwidth]{sph_method.png}
+	\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Smoothed Particle Hydrodynamics}
+\begin{columns}
+	\begin{column}{0.55\textwidth}
+	    \begin{align*}
+	      $$ A_k(r) &= \int A_k(\vec{r'}) W(|\vec{r} - \vec{r'}|,h) d\vec{r'} A_k(r_i) &= \sum_j A_k(\vec{r_j}) W(|\vec{r_i} - \vec{r_j}|,h) $$
+		\end{align*}
+	\end{column}
+	\begin{column}{0.4\textwidth}
+		\vspace{\topsep}	
+		\includegraphics[width=\columnwidth]{sph_method.png}
+	\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{SPH Code}
+Miluphcuda:
+\begin{itemize}
+	\item 500 kg mass \pause
+
+\end{itemize} 
+\end{frame}
+
 \begin{frame}{Miluphcuda setup}
 	\begin{itemize}
 		\item xˆ3 Kernel function \pause
-		\item Runge Kutta fourth order \pause
+		\item Runge Kutta fourth order integrator \pause
 		\item no self gravity \pause
 		\item p-$\alpha$ porosity - micro vs macroporosity\pause
 	\end{itemize}
 \end{frame}
+
 \begin{frame}{Initial conditions setup}
 	\begin{itemize}
 		\item xˆ3 Kernel function \pause
@@ -105,16 +164,10 @@
 \end{frame}
 
 \section{SPH results}
-\begin{frame}{Goal of simulations}
-Compare numerical results with observations to:
-	\begin{enumerate}
-		\item test numerical codes \pause
-		\item identify target material and properties through parameter studies
-	\end{enumerate}
-\end{frame}
 \begin{frame}{Beta factor}
 Momentum change because of ejecta: $\boldsymbol{\beta} = 1 + \frac{p_{ejecta}}{p_{impactor}}$
 \end{frame}
+
 %\begin{frame}{Target porosity and strength}
 %	%\animategraphics[loop,controls,width=0.8\linewidth]{100}{bina%c}{0000}{0300}
 %	exemplary video
@@ -133,7 +186,7 @@ Momentum change because of ejecta: $\boldsymbol{\beta} = 1 + \frac{p_{ejecta}}{p
 	\item A lot of individual physics implementable 
 	\item Many different codes available 
 	\item Difficult to reproduce and compare results between different codes
-	\item Dart Setup could be useful as benchmark 
+	\item Dart setup could be useful as benchmark 
 	\end{itemize}
 \end{frame}
 
@@ -146,8 +199,7 @@ Momentum change because of ejecta: $\boldsymbol{\beta} = 1 + \frac{p_{ejecta}}{p
 \end{itemize} 
 	Papers:
 \begin{itemize}
-	\item "Modeling impact outcomes for the Double Asteroid Redirection
-Test (DART) mission", Stickle et al., Procedia Engineering 2017
+	\item "Modeling impact outcomes for the Double Asteroid Redirection Test (DART) mission", Stickle et al., Procedia Engineering 2017
 	\item "The role of asteroid strength, porosity and internal friction in impact momentum transfer", Raducan et al., Icarus 2019
 \end{itemize} 
 \end{frame}
