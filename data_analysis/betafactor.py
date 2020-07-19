@@ -57,7 +57,7 @@ def betafactor(file, ejecta_thresh):
     # additional velocities
     df["v_abs"] = np.sqrt(df["v_x"] ** 2 + df["v_y"] ** 2 + df["v_z"] ** 2)
     df["v_escape"] = np.sqrt(2 * G * M / (r_didymoon + df.z))
-
+#
     # select ejecta particles
     filt_ejecta = (df["z"] > ejecta_thresh) & (df["v_z"] > 0) & (df["v_abs"] > df["v_escape"])
 
@@ -67,8 +67,8 @@ def betafactor(file, ejecta_thresh):
     beta = (impactor_momentum + recoil_momentum) / impactor_momentum
 
     # print results
-    print(f"Number of particles classified as ejecta: {filt_ejecta.sum()}")
-    print(f"Betafactor: {beta:.2f}")
+    #print(f"ejecta particles: {filt_ejecta.sum()}")
+    #print(f"Betafactor: {beta:.2f}")
     return beta
 
 
