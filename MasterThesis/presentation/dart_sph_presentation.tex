@@ -158,11 +158,12 @@ Impactor:
 \section{SPH results}
 \begin{frame}{Beta factor}
 Momentum change because of ejecta: $\boldsymbol{\beta} = 1 + \frac{p_{ejecta}}{p_{impactor}}$
+\vfill
 Particles considered ejecta:
-begin{itemize}
-	\item positive velocity in opposite impact direction \pause
-	\item above  \pause
-
+\begin{itemize}
+	\item 1 impactor diameter above surface \pause
+	\item absolute velocity above gravitational escape velocity \pause
+	\item positive velocity in z direction \pause
 \end{itemize} 
 \end{frame}
 
@@ -173,10 +174,22 @@ begin{itemize}
 
 \begin{frame}{Beta factor results}
 	\begin{tikzpicture}[remember picture,overlay]
-	\node[at=(current page.center)] {
+	\node[xshift=-2.8cm,yshift=5.8cm] at (current page.south) {
 		\includegraphics[keepaspectratio,
 		width=\paperwidth,
-		height=\paperheight]{cratering_raducan.pdf}};
+		height=0.5\paperheight]{beta_results.pdf}};
+	\end{tikzpicture}
+	\begin{tikzpicture}[remember picture,overlay]
+	\node[xshift=3.5cm,yshift=5.8cm] at (current page.south) {
+		\includegraphics[keepaspectratio,
+		width=\paperwidth,
+		height=0.45\paperheight]{beta_raducan.png}};
+	\end{tikzpicture}
+	\begin{tikzpicture}[remember picture,overlay]
+	\node[xshift=0cm,yshift=1.8cm] at (current page.south) {
+		\includegraphics[keepaspectratio,
+		width=0.98\paperwidth,
+		height=\paperheight]{beta_stickle.png}};
 	\end{tikzpicture}
 \end{frame}
 
