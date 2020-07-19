@@ -91,6 +91,24 @@ Compare numerical results with observations to:
 \end{enumerate}
 \end{frame}
 
+\begin{frame}{Smoothed Particle Hydrodynamics}
+	\begin{columns}
+		\begin{column}{0.55\textwidth}
+			\begin{itemize}
+				\item gridfree method
+				\item particles move through space with a velocity
+				\item particles carry physical quantities like density, pressure or energy
+				\item hydrodynamic/continuum mechanics equations can be solved for every particle
+				\item spatial resolution 
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.4\textwidth}
+			\vspace{\topsep}	
+			\includegraphics[width=\columnwidth]{sph_method.png}
+		\end{column}
+	\end{columns}
+\end{frame}
+
 \begin{frame}{Simulation scenario}
 Target:
 \begin{itemize}
@@ -105,73 +123,81 @@ Impactor:
 \end{itemize} 
 \end{frame}
 
-\begin{frame}{Smoothed Particle Hydrodynamics}
-\begin{columns}
-	\begin{column}{0.55\textwidth}
-		\begin{itemize}
-			\item gridfree method
-			\item particles move through space with a velocity
-			\item particles carry physical quantities like density, pressure or energy
-			\item hydrodynamic equations can be solved for every particle
-		\end{itemize}
-	\end{column}
-	\begin{column}{0.4\textwidth}
-	\vspace{\topsep}	
-	\includegraphics[width=\columnwidth]{sph_method.png}
-	\end{column}
-\end{columns}
+
+\begin{frame}{Miluphcuda solid models}
+	\begin{itemize}
+		\item fragmentation for brittle materials \pause
+		\item p-$\alpha$ porosity model \pause
+		\item shear strength \pause
+		\item no self gravity \pause
+
+	\end{itemize}
 \end{frame}
 
-\begin{frame}{Smoothed Particle Hydrodynamics}
-\begin{columns}
-	\begin{column}{0.55\textwidth}
-	    \begin{align*}
-	      $$ A_k(r) &= \int A_k(\vec{r'}) W(|\vec{r} - \vec{r'}|,h) d\vec{r'} A_k(r_i) &= \sum_j A_k(\vec{r_j}) W(|\vec{r_i} - \vec{r_j}|,h) $$
-		\end{align*}
-	\end{column}
-	\begin{column}{0.4\textwidth}
-		\vspace{\topsep}	
-		\includegraphics[width=\columnwidth]{sph_method.png}
-	\end{column}
-\end{columns}
+\begin{frame}{Initial conditions}
+	IMAGE 1st frame
 \end{frame}
 
-\begin{frame}{SPH Code}
-Miluphcuda:
+\begin{frame}{Initial conditions}
+Target:
 \begin{itemize}
-	\item 500 kg mass \pause
-
+	\item basalt \pause
+	\item 20 meter diameter halfsphere \pause
+	\item constant smoothing length in center \pause
 \end{itemize} 
-\end{frame}
-
-\begin{frame}{Miluphcuda setup}
-	\begin{itemize}
-		\item xˆ3 Kernel function \pause
-		\item Runge Kutta fourth order integrator \pause
-		\item no self gravity \pause
-		\item p-$\alpha$ porosity - micro vs macroporosity\pause
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Initial conditions setup}
-	\begin{itemize}
-		\item xˆ3 Kernel function \pause
-		\item artifical viscosity \pause
-		\item Runge Kutta Fourth order \pause
-		\item no self gravity \pause
-		\item p-$\alpha$ porosity
-	\end{itemize}
+Impactor:
+\begin{itemize}
+	\item aluminum \pause
+	\item 0.75 meter diameter sphere \pause
+	\item 6 km/s impact velocity \pause
+	\item 500 kg mass \pause
+	\item same smoothing length as center of target \pause
+\end{itemize} 
 \end{frame}
 
 \section{SPH results}
 \begin{frame}{Beta factor}
 Momentum change because of ejecta: $\boldsymbol{\beta} = 1 + \frac{p_{ejecta}}{p_{impactor}}$
+Particles considered ejecta:
+begin{itemize}
+	\item positive velocity in opposite impact direction \pause
+	\item above  \pause
+
+\end{itemize} 
 \end{frame}
 
 %\begin{frame}{Target porosity and strength}
 %	%\animategraphics[loop,controls,width=0.8\linewidth]{100}{bina%c}{0000}{0300}
 %	exemplary video
 %\end{frame}
+
+\begin{frame}{Beta factor results}
+	\begin{tikzpicture}[remember picture,overlay]
+	\node[at=(current page.center)] {
+		\includegraphics[keepaspectratio,
+		width=\paperwidth,
+		height=\paperheight]{cratering_raducan.pdf}};
+	\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Beta factor other literature Stickle}
+	\begin{tikzpicture}[remember picture,overlay]
+	\node[xshift=0cm,yshift=2.5cm] at (current page.south) {
+		\includegraphics[keepaspectratio,
+		width=\paperwidth,
+		height=0.5\paperheight]{beta_stickle.png}};
+	\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Beta factor other literature Raducan}
+	\begin{tikzpicture}[remember picture,overlay]
+	\node[xshift=0cm,yshift=2.5cm] at (current page.south) {
+		\includegraphics[keepaspectratio,
+		width=\paperwidth,
+		height=\paperheight]{cratering_raducan.pdf}};
+	\end{tikzpicture}
+\end{frame}
+
 \begin{frame}{Crater shape}
 	\begin{tikzpicture}[remember picture,overlay]
 	\node[at=(current page.center)] {
@@ -181,12 +207,22 @@ Momentum change because of ejecta: $\boldsymbol{\beta} = 1 + \frac{p_{ejecta}}{p
 \end{tikzpicture}
 \end{frame}
 
+\begin{frame}{Crater shape other literature}
+	\begin{tikzpicture}[remember picture,overlay]
+	\node[at=(current page.center)] {
+		\includegraphics[keepaspectratio,
+		width=\paperwidth,
+		height=\paperheight]{cratering_raducan.pdf}};
+	\end{tikzpicture}
+\end{frame}
+
 \begin{frame}{Personal observations about SPH}
 	\begin{itemize}
 	\item A lot of individual physics implementable 
+	\item interaction between physical models within a code can get complex
 	\item Many different codes available 
 	\item Difficult to reproduce and compare results between different codes
-	\item Dart setup could be useful as benchmark 
+	\item Dart setup could be useful as benchmark for solid models
 	\end{itemize}
 \end{frame}
 
