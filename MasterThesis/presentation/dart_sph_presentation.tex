@@ -86,8 +86,8 @@
 \begin{frame}{Simulation goals}
 Compare numerical results with observations to:
 \begin{enumerate}[<+->]
-	\item test numerical codes 
-	\item identify target properties through parameter studies
+	\item Test numerical codes 
+	\item Identify target properties through parameter studies
 \end{enumerate}
 \end{frame}
 
@@ -95,13 +95,13 @@ Compare numerical results with observations to:
 Target:
 \begin{itemize}[<+->]
 	\item 160 meter diameter 
-	\item important parameters such as porosity and strength unknown 
+	\item Important parameters such as porosity and strength unknown 
 \end{itemize} 
 Impactor:
 \begin{itemize}[<+->]
 	\item 500 kg mass 
 	\item 6 km/s impact velocity
-	\item main body 1.3 x 1.2 x 1.2 meter
+	\item Main body 1.3 x 1.2 x 1.2 meter
 \end{itemize} 
 \end{frame}
 
@@ -109,11 +109,11 @@ Impactor:
 	\begin{columns}
 		\begin{column}{0.55\textwidth}
 			\begin{itemize}
-				\item gridfree method
-				\item particles move through space with a velocity
-				\item particles carry physical quantities like density, pressure or energy
-				\item hydrodynamic/continuum mechanics equations are solved for every particle 
-				\item flexible spatial resolution 
+				\item Gridfree method
+				\item Particles move through space with a velocity
+				\item Particles carry physical quantities like density, pressure or energy
+				\item Hydrodynamic/continuum mechanics equations are solved for every particle 
+				\item Flexible spatial resolution 
 			\end{itemize}
 		\end{column}
 		\begin{column}{0.4\textwidth}
@@ -125,8 +125,8 @@ Impactor:
 
 \begin{frame}{Miluphcuda solid models}
 	\begin{itemize}[<+->]
-		\item pressure dependent strength model 
-		\item fragmentation for brittle materials 
+		\item Pressure dependent strength model 
+		\item Fragmentation for brittle materials 
 		\item p-$\alpha$ porosity model 
 		\item Tillotson equation of state
 	\end{itemize}
@@ -152,12 +152,12 @@ Impactor:
 \begin{frame}{Initial conditions}
 Target:
 \begin{itemize}[<+->]
-	\item basalt
+	\item Basalt
 	\item 20 meter diameter halfsphere 
 \end{itemize} 
 Impactor:
 \begin{itemize}[<+->]
-	\item aluminum 
+	\item Aluminum 
 	\item 0.75 meter diameter sphere 
 	\item 6 km/s impact velocity 
 	\item 500 kg mass 
@@ -167,20 +167,50 @@ Impactor:
 \section{SPH results}
 
 \begin{frame}
-  \begin{columns}
+\begin{columns}
 	\begin{column}{0.59\textwidth}
 		\centering
-		50\% porous, $Y_0$ = 1MPa
-		\animategraphics[controls=play,width=\linewidth]{100}{movie_por50_stre6.}{0000}{0300}
+		0\% porous, $Y_0$ = 1 MPa
+		%\animategraphics[controls=play,width=\linewidth]{100}{movie_por0_stre6.}{0000}{0300}
 	\end{column}
 	\begin{column}{0.59\textwidth}
 		\centering
 		50\% porous, $Y_0$ = 1 MPa
-		\animategraphics[controls=play,width=\linewidth]{100}{movie_por0_stre6.}{0000}{0300}
+		%\animategraphics[controls=play,width=\linewidth]{100}{movie_por50_stre6.}{0000}{0300}
 	\end{column}
 \end{columns}
-
 \end{frame}
+
+\begin{frame}
+\begin{columns}
+	\begin{column}{0.59\textwidth}
+		\centering
+		50\% porous, $Y_0$ = 1 MPa
+		%\animategraphics[controls=play,width=\linewidth]{100}{movie_por50_stre6.}{0000}{0300}
+	\end{column}
+	\begin{column}{0.59\textwidth}
+		\centering
+		50\% porous, $Y_0$ = 1 kPa
+		%\animategraphics[controls=play,width=\linewidth]{100}{movie_por50_stre3.}{0000}{0300}
+	\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\begin{columns}
+	\begin{column}{0.59\textwidth}
+		\centering
+		50\% porous, $Y_0$ = 1 kPa
+		%\animategraphics[controls=play,width=\linewidth]{100}{movie_por50_stre3.}{0000}{0300}
+	\end{column}
+	\begin{column}{0.59\textwidth}
+		\centering
+		50\% porous, $Y_0$ = 1 kPa, 45 deg angle
+		%\animategraphics[controls=play,width=\linewidth]{100}{movie_por50_stre3_ang45.}{0000}{0300}
+	\end{column}
+\end{columns}
+\end{frame}
+
 
 \begin{frame}{Beta factor}
 Momentum change because of ejecta: $\boldsymbol{\beta} = 1 + \frac{p_{ejecta}}{p_{impactor}}$
@@ -188,55 +218,70 @@ Momentum change because of ejecta: $\boldsymbol{\beta} = 1 + \frac{p_{ejecta}}{p
 Particles considered ejecta:
 \begin{itemize}[<+->]
 	\item 1 impactor diameter above surface 
-	\item positive velocity in z direction 
-	\item absolute velocity above gravitational escape velocity 
+	\item Positive velocity in z direction 
+	\item Absolute velocity above gravitational escape velocity 
 \end{itemize} 
 \end{frame}
 
-\begin{frame}{Beta factor results}
+\setbeamercovered{invisible}
+\begin{frame}{Beta factor}
 	\begin{tikzpicture}[remember picture,overlay]
 	\node[xshift=-2.8cm,yshift=5.8cm] at (current page.south) {
 		\includegraphics[keepaspectratio,
 		width=\paperwidth,
 		height=0.5\paperheight]{beta_results.pdf}};
-	\end{tikzpicture}
+	\end{tikzpicture}\pause
+	\begin{tikzpicture}[remember picture,overlay]
+	\node[xshift=0cm,yshift=1.8cm] at (current page.south) {
+	\includegraphics[keepaspectratio,
+	width=0.98\paperwidth,
+	height=\paperheight]{beta_stickle.png}};
+	\end{tikzpicture}\pause
 	\begin{tikzpicture}[remember picture,overlay]
 	\node[xshift=3.5cm,yshift=5.8cm] at (current page.south) {
 		\includegraphics[keepaspectratio,
 		width=\paperwidth,
 		height=0.45\paperheight]{beta_raducan.png}};
 	\end{tikzpicture}
-	\begin{tikzpicture}[remember picture,overlay]
-	\node[xshift=0cm,yshift=1.8cm] at (current page.south) {
-		\includegraphics[keepaspectratio,
-		width=0.98\paperwidth,
-		height=\paperheight]{beta_stickle.png}};
-	\end{tikzpicture}
 \end{frame}
 
 \begin{frame}{Crater shape}
 	\begin{tikzpicture}[remember picture,overlay]
-	\node[at=(current page.center)] {
+	\node[xshift=0cm,yshift=6cm] at (current page.south) {
 	\includegraphics[keepaspectratio,
-	width=\paperwidth,
-	height=\paperheight]{cratering_raducan.pdf}};
+	width=0.9\paperwidth,
+	height=\paperheight]{cratering_raducan_top.png}};
+	\end{tikzpicture}
+	\begin{tikzpicture}[remember picture,overlay]
+	\node[xshift=-4.5cm,yshift=2.5cm] at (current page.south) {
+		\includegraphics[keepaspectratio,
+		width=0.25\paperwidth,
+		height=\paperheight]{crater_por0_str1e6.png}};
+	\end{tikzpicture}
+	\begin{tikzpicture}[remember picture,overlay]
+	\node[xshift=-1.5cm,yshift=2.5cm] at (current page.south) {
+		\includegraphics[keepaspectratio,
+		width=0.25\paperwidth,
+		height=\paperheight]{crater_por17_str1e5.png}};
+	\end{tikzpicture}
+	\begin{tikzpicture}[remember picture,overlay]
+\node[xshift=1.5cm,yshift=2.5cm] at (current page.south) {
+	\includegraphics[keepaspectratio,
+	width=0.25\paperwidth,
+	height=\paperheight]{crater_por33_str1e4.png}};
+\end{tikzpicture}
+	\begin{tikzpicture}[remember picture,overlay]
+\node[xshift=4.5cm,yshift=2.5cm] at (current page.south) {
+	\includegraphics[keepaspectratio,
+	width=0.25\paperwidth,
+	height=\paperheight]{crater_por50_str1e3.png}};
 \end{tikzpicture}
 \end{frame}
 
-\begin{frame}{Crater shape other literature}
-	\begin{tikzpicture}[remember picture,overlay]
-	\node[at=(current page.center)] {
-		\includegraphics[keepaspectratio,
-		width=\paperwidth,
-		height=\paperheight]{cratering_raducan.pdf}};
-	\end{tikzpicture}
-\end{frame}
-
-\setbeamercovered{invisible}
 \begin{frame}{Personal observations about SPH}
 	\begin{itemize}[<+->]
 	\item A lot of individual physics implementable 
-	\item interaction between physical models within a code can get complex
+	\item Interaction between physical models within a code can get complex
 	\item Many different codes available 
 	\item Difficult to reproduce and compare results between different codes
 	\item Dart setup could be useful as benchmark for solid models
