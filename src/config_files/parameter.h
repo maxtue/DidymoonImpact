@@ -90,7 +90,7 @@
 #define SHEPARD_CORRECTION 1
 // for linear consistency
 // add tensorial correction tensor to dSdt calculation -> better conservation of angular momentum
-#define TENSORIAL_CORRECTION 0
+#define TENSORIAL_CORRECTION 1
 
 // plastic flow conditions
 // you can choose between
@@ -186,10 +186,10 @@
 // d sml / dt  = sml/DIM * 1/rho  \nabla velocity
 // if you want to specify an individual initial smoothing length for each particle (instead of the material
 // specific one in material.cfg) in the initial particle file, set READ_INITIAL_SML_FROM_PARTICLE_FILE to 1
-#define VARIABLE_SML 0
+#define VARIABLE_SML 1
 #define FIXED_NOI 0
-#define INTEGRATE_SML 0
-#define READ_INITIAL_SML_FROM_PARTICLE_FILE 0
+#define INTEGRATE_SML 1
+#define READ_INITIAL_SML_FROM_PARTICLE_FILE 1
 
 // if set to 0, h = (h_i + h_j)/2  is used to calculate W_ij
 // if set to 1, W_ij = ( W(h_i) + W(h_j) ) / 2
