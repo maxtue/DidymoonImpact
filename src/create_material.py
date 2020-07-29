@@ -37,8 +37,8 @@ f.write(
             till_alpha = 5.0
             till_beta = 5.0
                 cohesion = 1e9
-                friction_angle = 0.0
-                friction_angle_damaged = 0.0
+                friction_angle = 0.785398163
+                friction_angle_damaged = 0.5404195
         }};
     }},
 
@@ -79,8 +79,8 @@ f.write(
                     W_M = 16.0
                     W_K = 1e61
                     cohesion = {args.strength}
-                    friction_angle = 0.9827937232
-                    friction_angle_damaged = 0.5404195003
+                    friction_angle = 0.785398163
+                    friction_angle_damaged = 0.5404195
         }};
     }}
     );

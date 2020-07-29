@@ -1,8 +1,8 @@
 ## create setups with different parameters
 rm -rf parameterstudy_runscripts/
-for porosity in 0.0 0.17 0.33 0.50
+for porosity in 0.0 0.20 0.50 0.75
 do
-    for strength in 1e3 1e4 1e5 1e6
+    for strength in 1e3 1e4 1e5
     do
         for angle in 0 45
         do

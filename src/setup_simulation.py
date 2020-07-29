@@ -7,7 +7,7 @@ from pathlib import Path
 parser = argparse.ArgumentParser()
 parser.add_argument("--angle", help="impact angle", default=0.0, type=float)
 parser.add_argument("--name", help="name of runscript", default="test")
-parser.add_argument("--particles", help="number of particles", default=30000, type=int)
+parser.add_argument("--particles", help="number of particles", default=800000, type=int)
 parser.add_argument("--porosity", help="target porosity", default=0.5, type=float)
 parser.add_argument("--queue", help="queueing type", default="local")
 parser.add_argument("--steps", help="number of output steps", default=300)
@@ -26,11 +26,7 @@ f = open(filename, "w")
 # sbatch script format for kamino and endor
 if args.queue == "sbatch":
     f.write(
-        "#!/bin/bash\n"
-        "#SBATCH --partition=gpu\n"
-        f"#SBATCH -J {args.name}\n"
-        "#SBATCH --time=07-00\n\n"
-        "set -e\n\n"
+        "#!/bin/bash\n" "#SBATCH --partition=gpu\n" f"#SBATCH -J {args.name}\n" "#SBATCH --time=07-00\n\n" "set -e\n\n"
     )
 
 # pbs script format for binac
@@ -96,7 +92,7 @@ f.write(
 
 f.write(
     "## Starting miluphcuda\n"
-    f"./miluphcuda -v -H -f impact_{args.name}.0000 -m material.cfg -n {args.steps} -t {args.time} > output_{args.name}.log 2> error_{args.name}.log\n\n"
+    f"./miluphcuda -v -H -A -f impact_{args.name}.0000 -m material.cfg -n {args.steps} -t {args.time} > output_{args.name}.log 2> error_{args.name}.log\n\n"
 )
 
 f.write("## Saving ls output with times of files\n" "ls -ltrh > ls_output.log\n")
