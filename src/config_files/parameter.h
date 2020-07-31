@@ -156,7 +156,7 @@
 // FRAGMENTATION. if not used, set to 1
 #define MAX_NUM_FLAWS 32
 // maximum number of interactions per particle -> fixed array size
-#define MAX_NUM_INTERACTIONS 180
+#define MAX_NUM_INTERACTIONS 300
 
 // gravitational constant in SI
 #define C_GRAVITY_SI 6.67408e-11

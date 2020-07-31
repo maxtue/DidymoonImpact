@@ -7,7 +7,7 @@ from pathlib import Path
 parser = argparse.ArgumentParser()
 parser.add_argument("--angle", help="impact angle", default=0.0, type=float)
 parser.add_argument("--name", help="name of runscript", default="test")
-parser.add_argument("--particles", help="number of particles", default=800000, type=int)
+parser.add_argument("--particles", help="number of particles", default=80000, type=int)
 parser.add_argument("--porosity", help="target porosity", default=0.5, type=float)
 parser.add_argument("--queue", help="queueing type", default="local")
 parser.add_argument("--steps", help="number of output steps", default=300)
