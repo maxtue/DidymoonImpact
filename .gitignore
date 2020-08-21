@@ -2,6 +2,7 @@
 run*
 data/
 movie*
+*.pdf
 .vscode/
 *test*
 .DS_Store
