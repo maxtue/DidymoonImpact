@@ -1,18 +1,20 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
+\usepackage[draft]{graphicx}
+\graphicspath{{../images/},{../images/movie_por0_stre6/},{../images/movie_por50_stre6/},{../images/movie_por50_stre3/},{../images/movie_por50_stre3_ang45/}}
 \usepackage[style=numeric,sorting=ynt]{biblatex}
 \addbibresource{MasterThesis_References.bib}
 
 \title{Asteroid Deflection Impact Simulations}
 \author{Maximilian Rutz}
 \date{}
-
 \begin{document}
-% front page
+
+% Front page
 \maketitle
 \begin{abstract}
-
+    SPH simulations for the DART Mission ...
 \end{abstract}
 
 % Contents page
@@ -22,32 +24,17 @@
 % Begin of sections
 \newpage
 \section{Introduction}
-\section{Theory}
-\subsection{SPH}
-\subsection{Dart Impact}
+
+\subsection{The Dart and Hera Missions}
+
+\subsection{State of Research}
+A number of research groups \cite{Jutzi_p_alpha_1}
 \section{Methods}
-\subsection{SPH configuration}
-- contents of parameter.h file
-\subsection{Material configuration and initial setup}
-\subsubsection{SPH-particle positions}
-- particle distance in relation to sml
-- problem with resolution
-\subsubsection{Equation of State}
-- Tillotson
-\subsubsection{Porosity model}
-- p-alpha
-Most of this subsection is taken from \cite{Jutzi_p_alpha_1}.
-\subsubsection{Boundary layer}
-- artificial viscosity used for shock waves
-\subsection{Crater size}
-- algorithm for finding highest particles that are part of the bulk
-\subsection{Beta factor}
-- correcting for self-gravity (?)
+\subsection{Theory}
+\subsection{Numerics}
 \section{Results}
-\subsection{Crater size}
-\subsection{Beta factor}
-\section{Conclusion}
 \section{Discussion}
+\section{Summary and Conclusion}
 
 % References
 \newpage
@@ -55,3 +42,4 @@ Most of this subsection is taken from \cite{Jutzi_p_alpha_1}.
 
 \end{document}
 
+1. Abstract2. Introduction3. Methods4. Results5. Discussion6. Summary and Conclusions7. Acknowledgments8. References

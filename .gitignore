@@ -1,6 +1,7 @@
 # Project specific
 run*
 data/
+Bachelorthesis/
 movie*
 *.pdf
 .vscode/
