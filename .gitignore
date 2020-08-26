@@ -3,7 +3,7 @@ run*
 data/
 Bachelorthesis/
 movie*
-*.pdf
+*presentation.pdf
 .vscode/
 *test*
 .DS_Store
