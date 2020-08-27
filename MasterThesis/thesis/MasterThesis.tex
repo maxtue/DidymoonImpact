@@ -6,40 +6,39 @@
 \usepackage[style=numeric,sorting=ynt]{biblatex}
 \addbibresource{MasterThesis_References.bib}
 
-\title{Asteroid Deflection Impact Simulations}
+\title{Smoothed Particle Hydrodynamics Simulations for Asteroid Deflection}
 \author{Maximilian Rutz}
 \date{}
+
 \begin{document}
 
 % Front page
 \maketitle
 \begin{abstract}
-    SPH simulations for the DART Mission ...
+    \input{sections/1_Abstract.tex}
 \end{abstract}
 
 % Contents page
 \newpage
 \tableofcontents
 
-% Begin of sections
+% Body
 \newpage
 \section{Introduction}
-
-\subsection{The Dart and Hera Missions}
-
-\subsection{State of Research}
-A number of research groups \cite{Jutzi_p_alpha_1}
-\section{Methods}
-\subsection{Theory}
-\subsection{Numerics}
+\input{sections/2_Introduction.tex}
+\section{Theory}
+\input{sections/3_Theory.tex}
+\section{Numerics}
+\input{sections/4_Numerics.tex}
 \section{Results}
+\input{sections/5_Results.tex}
 \section{Discussion}
-\section{Summary and Conclusion}
+\input{sections/6_Discussion.tex}
+\section{Conclusions}
+\input{sections/7_Conclusions.tex}
 
 % References
 \newpage
 \printbibliography
 
 \end{document}
-
-1. Abstract2. Introduction3. Methods4. Results5. Discussion6. Summary and Conclusions7. Acknowledgments8. References
