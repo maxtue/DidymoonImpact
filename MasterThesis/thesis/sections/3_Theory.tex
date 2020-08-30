@@ -1,6 +1,12 @@
 I will start with the fluid case for SPH and then show how it can be modified for solids.
 
-\subsection{Incompressible Navier-Stokes Equations}
+\subsection{Navier-Stokes Equations}
+1) Conservation of Mass
+2) Conservation of Momentum
+3) Conservation of Energy
+
+- we end up at Cauchy Momentum Equation
+
 - quite new: developed in 1992
 - goal was to solve Navier-Stokes Equations
 - Fluide die Navier-Stokes Equations gehorchen heissen newtonsche fluide
@@ -38,10 +44,20 @@ $\rho \cdot \frac{dv_i}{dt} = \rho \cdot \frac{Dv}{Dt} = \rho \cdot (\frac{\part
 $ \frac{dv_i}{dt} = g - \frac{1}{\rho_i}\cdot \nabla p + \frac{\mu}{\rho_i} \cdot \Delta  v $
 - This is where we change from Euler(grid methods) to Lagrangian view (particle information) ...
 
-\subsection{Compressible Navier-Stokes Equations}
-To apply the Navier-Stokes Equations to solids, a more general form is needed.
+\subsection{Cauchy Momentum equation}
 
 
+\subsection{Constitutive equations - Deviatoric Stress Tensor}
+- Evolution of Deviatoric Stress Tensor
+- To apply the Navier-Stokes Equations to solids, a more general form is needed.
+- We use a subset of Navier-Stokes Equation
+- Constitutive equation decides whether it is a fluid or a solid
+
+- plus continuity equation
+- how does ONE Navier Stokes Equation become THREE Euler Equations?
+
+\subsection{Equations of State}
+-
 
 \subsection{Smoothed Particle Hydrodynamics}
 Now that we have our compressible Navier-Stokes Equations in Lagrangian form we want to solve them.

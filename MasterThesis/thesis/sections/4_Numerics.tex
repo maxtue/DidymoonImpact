@@ -2,12 +2,15 @@
 - SPH needs uniform macro structure but random micro structure
 
 
-\subsection{Right hand side quantities}
+\subsection{SPH - Right hand side quantities}
 - how are the equations from Theory section used to get the development over time
 - final form of Equation we used:
+.........................
+- Neighborhoudsearch instead of computing Kernel over all particles is faster
+- Upper limit to maximum neighbor particles
 
 
-\subsection{Timestep Integrator}
+\subsection{Time Integration}
 1) Timestep algorithm for velocity update (RungeKutta 2)
 2) Update particle positions from velocity and acceleration (accel from Navier Stokes)
 3) Error criterium for timestep (what is used? RK45?)
