@@ -3,7 +3,7 @@ Computational physics simulations for the NASA asteroid deflection mission DART:
 https://dart.jhuapl.edu/
 
 ## Motivation
-Can an asteroid coming for earth be redirected by a planned impact? To find out, NASA is sending a small spacecraft to the Didymos asteroid binary. The spacecraft will crash into the smaller Didymos B, informally called Didymoon. ESA will later look at the results with its own HERA mission.\
+Can an asteroid coming for earth be redirected with a planned impact? To find out, NASA is sending a small spacecraft to the Didymos asteroid binary. The spacecraft will crash into the smaller Didymos B, informally called Didymoon. ESA will later look at the results with its own HERA mission.\
 \
 Numerical simulations ahead of the mission support its planning and execution. Many material properties of the Didymoon asteroid are unknown and the exact impact conditions might vary. This project simulates the outcome of the DART impact for different parameters.\
 \
