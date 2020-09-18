@@ -3,7 +3,7 @@
 \usepackage[english]{babel}
 \usepackage{amsmath}
 \usepackage{url}
-\usepackage[draft]{graphicx}
+\usepackage[]{graphicx}
 \usepackage[style=numeric,sorting=ynt]{biblatex}
 \graphicspath{{../images/},{../images/movie_por0_stre6/},{../images/movie_por50_stre6/},{../images/movie_por50_stre3/},{../images/movie_por50_stre3_ang45/}}
 \addbibresource{MasterThesis_References.bib}
@@ -17,7 +17,7 @@
 % Front page
 \maketitle
 \begin{abstract}
-   \input{sections/1_Abstract.tex}
+   \input{sections/0_Abstract.tex}
 \end{abstract}
 
 % Contents page
@@ -27,17 +27,19 @@
 % Body
 \newpage
 \section{Introduction}
-\input{sections/2_Introduction.tex}
-\section{Theory}
-\input{sections/3_Theory.tex}
-\section{Numerics}
-\input{sections/4_Numerics.tex}
+\input{sections/1_Introduction.tex}
+\newpage
+\section{Asteroid Deflection Missions}
+\input{sections/2_Asteroid_Deflection_Missions.tex}
+\newpage
+\section{Numerical Simulations}
+\input{sections/3_Numerical_Simulations.tex}
+\newpage
 \section{Results}
-\input{sections/5_Results.tex}
+\input{sections/4_Results.tex}
+\newpage
 \section{Discussion}
-\input{sections/6_Discussion.tex}
-\section{Conclusions}
-\input{sections/7_Conclusions.tex}
+\input{sections/5_Discussion.tex}
 
 % References
 \newpage
