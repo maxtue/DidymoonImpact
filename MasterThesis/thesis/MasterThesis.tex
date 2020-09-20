@@ -1,16 +1,29 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
-\usepackage{amsmath}
-\usepackage{url}
-\usepackage[]{graphicx}
 \usepackage[style=numeric,sorting=ynt]{biblatex}
+\usepackage[]{graphicx} % standard image package
+\usepackage{svg} % include svg images
+\usepackage{amsmath} % standard math package
+\usepackage{float} % allow in place anchoring of images
+\usepackage{multirow} % create nice tables
+\usepackage{hyperref} % make links clickable
+
+% Set up packages
 \graphicspath{{../images/},{../images/movie_por0_stre6/},{../images/movie_por50_stre6/},{../images/movie_por50_stre3/},{../images/movie_por50_stre3_ang45/}}
 \addbibresource{MasterThesis_References.bib}
 
+% Commands
+%\newcommand{\vec}{\boldsymbol}
+
+% Metadata
 \title{Smoothed Particle Hydrodynamics Simulations for Asteroid Deflection}
 \author{Maximilian Rutz}
 \date{}
+
+%%%%%%%%%%%%%%%%%
+% END OF PREAMBLE
+%%%%%%%%%%%%%%%%%
 
 \begin{document}
 
