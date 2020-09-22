@@ -1,4 +1,5 @@
 \subsection{Smoothed Particle Hydrodynamics}
+\subsection{Main concept}
 Smoothed Particle Hydrodynamics is a numerical simulation method first introduced by \cite{Monaghan_1977} in 1977. It is a Lagrangian particle method and as such often used when the geometry of the underlying problem makes it difficult to apply Eulerian grid-based methods like finite difference schemes. Although SPH is most often used to model liquids, it is possible to add physical models for solids as well.
 
 A SPH simulation is composed of many individual SPH particles. Each particle moves through space with a velocity $\vec{v}$ and a mass m. In contrast to particle methods used for N-body simulations or molecular dynamics, SPH particles carry information about continuous variables such as the density $\rho$ or energy e. The particles only act as computational points at which equations from hydrodynamics/continuum mechanics such as the Euler or Navier-Stokes Equations are evaluated. Solving such equations comes down to converting partial differential equations to a system of first order ordinary differential equations in time.
@@ -39,19 +40,21 @@ Figure \ref{fig:smoothing_kernel} illustrates
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{smoothing_kernel.png}
-    \caption{Kernel function \cite{wiki:smoothing_kernel}}
+    \caption{Kernel function \cite{image:smoothing_kernel}}
     \label{fig:smoothing_kernel}
 \end{figure}
 
-\subsection{Miluphcuda SPH code}
-Miluphcuda is a GPU accelerated smoothed particle hydrodynamics code that has been developed over several years at the University of Tuebingen by Christoph Schaefer and others. Its general use is well documented in \cite{Schaefer_2016}. Since the publication of the paper additional models for porosity and strength have been implemented.
+\subsubsection{Variable Smothing length}
+\subsubsection{Artificial viscosity}
 
+\subsection{Conservation laws}
+\subsection{Constitutive equations}
 
-\subsubsection{Equation of State}
+\subsection{Equation of State}
 The Tillotson equation of state \cite{Tillotson_1962}
 
 
-\subsubsection{Porosity model}
+\subsection{Porosity model}
 There are different ways in which porosity can be modeled depending on the pore size. Depending on the simulation, macro porosity with pore sizes above the resolution of the simulation can be accounted for in the initial conditions. This however becomes impossible for granular material with sub-resolution sized grains and pores.
 
 Microporosity models porosity as an additional material property and can be applied independently of the resolution.
@@ -70,6 +73,6 @@ Often the porosity $\phi$ is used instead of the distention $\alpha$. They relat
 \end{equation}
 
 Quadratic crush curve
-\subsubsection{Strength model}
+\subsection{Strength model}
 
-\subsubsection{Time Integration}
+\subsection{Damage model for brittle material}

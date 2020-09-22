@@ -1,18 +1,25 @@
+\subsection{Miluphcuda SPH code}
+Miluphcuda is a smoothed particle hydrodynamics code that has been developed over several years at the University of Tuebingen by Christoph Schaefer and others. Its general use is well documented in \cite{Schaefer_2016}.
+
+
 \subsection{Initial conditions}
+- Target basalt halfsphere
+- Impactor aluminium sphere
 - resolution bound to variable smoothing length
-- SPH needs uniform macro structure but random micro structure
+- Uniform macro structure but random micro structure to avoid
+- seagen \cite{github:SEAGen} used to create initial conditions
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{impact_start.png}
-    \caption{initial conditions}
+    \caption{start of simulation}
     \label{fig:impact_start}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{impact_end.png}
-    \caption{cratering of half sphere}
+    \caption{end of simulation}
     \label{fig:impact_end}
 \end{figure}
 
@@ -22,7 +29,7 @@
     \centering
     \begin{tabular}{ |l|l|l|l| }
         \hline
-        \multicolumn{4}{ |c| }{Basalt target parameters}                                                                                      \\
+        \multicolumn{2}{|c|}{}                & Target                  & Projectile                                                          \\
         \hline
         \multirow{10}{*}{Tillotson EOS}       & $\rho_0$                & 2.86 $\cdot 10^3 g\cdot cm^{-3}$ & 2.70 $\cdot 10^3 g\cdot cm^{-3}$ \\
                                               & $A_T$                   & 2.67 $\cdot 10^{10}$ Pa          & 7.52 $\cdot 10^{10}$ Pa          \\
@@ -53,8 +60,8 @@
                                               & $\beta$                 & 2.0                              & 2.0                              \\ \hline
         \hline
     \end{tabular}
-    \caption{Target parameters}
-    \label{fig:target_parameters}
+    \caption{Material parameters for basalt target and aluminium Impactor}
+    \label{fig:material_parameters}
 \end{table}
 
 - variable smoothing length min 0.1 bis max 10.0
