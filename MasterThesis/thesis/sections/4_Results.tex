@@ -1,14 +1,16 @@
 The simulations were run with porosities of 0\%, 17\%, 33\% and 50\% and cohesive strengths of 1kPa, 10kPa, 100kPa and 1MPa under impact angles of 0 and 45 degrees. This yields 32 simulations in total.
 
 \subsection{Cratering}
-Figures \ref{fig:crater1} through \ref{fig:crater4} qualitatively show the effects of porosity and strength on the crater formation. The higher the porosity and the lower the porosity become, the wider and deeper the crater gets.
+- qualitative analysis
 
+- head on
 \begin{figure}[H]
    \centering
    \includegraphics[width=\textwidth]{crater_por0_stre6.png}
    \caption{No porosity (0\%), high strength (Y=1MPa)}
    \label{fig:crater1}
 \end{figure}
+
 
 \begin{figure}[H]
    \centering
@@ -24,20 +26,59 @@ Figures \ref{fig:crater1} through \ref{fig:crater4} qualitatively show the effec
    \label{fig:crater3}
 \end{figure}
 
+- 45 degrees
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\textwidth]{crater_por0_stre6_ang45.png}
+   \caption{No porosity (0\%), high strength (Y=1MPa), 45 degree angle}
+   \label{fig:crater4}
+\end{figure}
+
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\textwidth]{crater_por50_stre6_ang45.png}
+   \caption{High porosity (50\%), high strength (Y=1MPa), 45 degree angle}
+   \label{fig:crater5}
+\end{figure}
+
 \begin{figure}[H]
    \centering
    \includegraphics[width=\textwidth]{crater_por50_stre3_ang45.png}
    \caption{High porosity (50\%), low strength (Y=1kPa), 45 degree angle}
-   \label{fig:crater4}
+   \label{fig:crater6}
 \end{figure}
-
 
 \subsection{Beta factor}
 - explanation of beta factor
 
 \begin{figure}[H]
    \centering
-   \includegraphics[width=\textwidth]{beta_results.pdf}
+   \includegraphics[width=\textwidth]{beta_results_ang0.pdf}
    \caption{beta factor}
-   \label{fig:beta_factor}
+   \label{fig:beta_factor_0}
+\end{figure}
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\textwidth]{beta_results_ang45.pdf}
+   \caption{beta factor}
+   \label{fig:beta_factor_45}
+\end{figure}
+
+
+- few particles (with highest velocities so the ones that are far away) account for most of the momentum
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\textwidth]{beta_lorenz_ang0.pdf}
+   \caption{Lorenz curve for momentum distribution head on}
+   \label{fig:beta_factor_lorenz_0}
+\end{figure}
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\textwidth]{beta_lorenz_ang45.pdf}
+   \caption{Lorenz curve for momentum distribution 45 degree}
+   \label{fig:beta_factor_lorenz_45}
 \end{figure}
