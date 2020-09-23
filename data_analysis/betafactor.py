@@ -27,12 +27,23 @@ def parse_args():
     )
 
     parser.add_argument(
-        "--ejecta_thresh", help="height threshold for ejecta particles", type=float, default=0.0,
+        "--ejecta_thresh",
+        help="height threshold for ejecta particles",
+        type=float,
+        default=0.0,
     )
+
+    parser.add_argument(
+        "--angle",
+        help="angle of impact along x-direction",
+        type=float,
+        default=0.0,
+    )
+
     return parser.parse_args()
 
 
-def betafactor(file, ejecta_thresh):
+def betafactor(file, ejecta_thresh, angle):
     # read data from miluphcuda .h5 file
     with h5py.File(file, "r") as hdf:
         df = pd.DataFrame(
@@ -57,21 +68,22 @@ def betafactor(file, ejecta_thresh):
     # additional velocities
     df["v_abs"] = np.sqrt(df["v_x"] ** 2 + df["v_y"] ** 2 + df["v_z"] ** 2)
     df["v_escape"] = np.sqrt(2 * G * M / (r_didymoon + df.z))
-#
+    df["v_angle"] = np.sqrt((np.sin(angle) * df["v_x"]) ** 2 + (np.cos(angle) * df["v_z"] ** 2))
+
     # select ejecta particles
     filt_ejecta = (df["z"] > ejecta_thresh) & (df["v_z"] > 0) & (df["v_abs"] > df["v_escape"])
 
     # compute betafactor
-    impactor_momentum = (df.loc[df["material_type"] == 0]["m"] * 6000).sum()
-    recoil_momentum = (df[filt_ejecta]["m"] * df[filt_ejecta]["v_z"]).sum()
-    beta = (impactor_momentum + recoil_momentum) / impactor_momentum
+    impactor_momentum = df.loc[df["material_type"] == 0]["m"] * 6000
+    recoil_momentum = df[filt_ejecta]["m"] * df[filt_ejecta]["v_angle"]
+    beta = (impactor_momentum.sum() + recoil_momentum.sum()) / impactor_momentum.sum()
 
     # print results
-    #print(f"ejecta particles: {filt_ejecta.sum()}")
-    #print(f"Betafactor: {beta:.2f}")
-    return beta
+    # print(f"ejecta particles: {filt_ejecta.sum()}")
+    # print(f"Betafactor: {beta:.2f}")
+    return beta, recoil_momentum
 
 
 if __name__ == "__main__":
     args = parse_args()
-    betafactor(file=args.file, ejecta_thresh=args.ejecta_thresh)
+    betafactor(file=args.file, ejecta_thresh=args.ejecta_thresh, angle=args.angle)

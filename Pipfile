@@ -17,6 +17,7 @@ pandas = "*"
 nb-black = "*"
 scipy = "*"
 rise = "*"
+quantecon = "*"
 
 [requires]
 python_version = "*"
