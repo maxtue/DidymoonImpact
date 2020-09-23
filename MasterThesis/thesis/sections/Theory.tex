@@ -1,0 +1,86 @@
+I will start with the fluid case for SPH and then show how it can be modified for solids.
+
+\subsection{Navier-Stokes Equations}
+1) Conservation of Mass
+2) Conservation of Momentum
+3) Conservation of Energy
+
+- we end up at Cauchy Momentum Equation
+
+- quite new: developed in 1992
+- goal was to solve Navier-Stokes Equations
+- Fluide die Navier-Stokes Equations gehorchen heissen newtonsche fluide
+- there are compressible and incompressible Navier Stokes Equations (for shockwaves)
+- equations describe velocity changes (in a defined region of space) over time
+- compressible N.S. Equations:
+$\rho \cdot (\frac{\partial v}{\partial t} + v \cdot \nabla v) = \rho \cdot g - \nabla p + \mu \cdot \Delta v$
+- convective acceleration (schneller bei Verengung) is a vector, not the result of a dot product:
+$v\cdot \nabla v \equiv \begin{pmatrix} v_x \cdot \frac{\partial v_x}{\partial x} \\ v_y \cdot \frac{\partial v_y}{\partial y} \\ v_z \cdot \frac{\partial v_z}{\partial z}\end{pmatrix}$
+- vector equation means three equations have to be solved independently
+- Rearranged long vector form of navier stokes:
+$ \rho \cdot \begin{pmatrix} \frac{\partial v_x}{\partial t} \\ \frac{\partial v_y}{\partial t} \\ \frac{\partial v_z}{\partial t}\end{pmatrix} =  - \rho \cdot \begin{pmatrix} v_x \cdot \frac{\partial v_x}{\partial x} \\ v_y \cdot \frac{\partial v_y}{\partial y} \\ v_z \cdot \frac{\partial v_z}{\partial z}\end{pmatrix} + \rho \cdot \begin{pmatrix} g_x \\ g_y \\ g_z \end{pmatrix} - \begin{pmatrix} \frac{\partial p}{\partial x} \\ \frac{\partial p}{\partial y} \\ \frac{\partial p}{\partial z}\end{pmatrix} + \mu \cdot \begin{pmatrix}  \frac{\partial^{2} v_x}{\partial x^{2}} + \frac{\partial^{2} v_x}{\partial y^{2}} + \frac{\partial^{2} v_x}{\partial z^{2}} \\ \frac{\partial^{2} v_y}{\partial x^{2}} + \frac{\partial^{2} v_y}{\partial y^{2}} + \frac{\partial^{2} v_y}{\partial z^{2}} \\ \frac{\partial^{2} v_z}{\partial x^{2}} + \frac{\partial^{2} v_z}{\partial y^{2}} + \frac{\partial^{2} v_z}{\partial z^{2}} \end{pmatrix} $
+- laplacian on a vector field returns a vector, not a scalar!
+- pressure (is this the same in miluphcuda?):
+$ p = k \cdot (\rho - \rho_0) $
+- Mass continuity (dividing by rho also gives velocity continuity!? - yes, but only in incompressible N.S. equations - what about solids?):
+- $\rho \cdot (\nabla \cdot v) = 0 $
+- how to solve N.S. and continuity at same time? ... automatically solved in particle methods when particles are not created/destroyed
+- In SPH we want to know the local velocity change at each particle location
+- Show that:
+$ \frac{dv_i}{dt} = \frac{\partial v}{\partial t} + v \cdot \nabla v $
+
+- $v \cdot \nabla v $ holds for any scalar field property y that a particle traverses with velocity u $u \cdot \nabla y $ since it is the projection $u \cdot \nabla y = |u|\cdot|\nabla y| \cdot cos (\Theta)$ where $\Theta$ is the angle between $u$ and $\nabla y$.
+- Thus, the local change in the field property $\frac{dy_i}{dt}$ at the point i in the Lagrangian view corresponds to the sum of the change of the field property at a point i over time $\frac{\partial y_i}{\partial t}$ and the change $u_i \cdot \nabla y_i $ of the field property due to the movement of the particle along the field with velocity $u$ in the Eulerian view:
+$ \frac{dy_i}{dt} = \frac{\partial y_i}{\partial t} + u_i \cdot \nabla y_i $
+
+This expression is called the Material Derivative $\frac{Dy}{dt}$:
+$ \frac{Dy}{dt} \equiv \frac{\partial y}{\partial t} + u \cdot \nabla y $
+
+It gives us the change of the field property in the reference frame of the particle (denoted by the subscript i):
+
+In the Navier-Stokes Equations the scalar fields of interest happen to be the individual velocity components so we get:
+$\rho \cdot \frac{dv_i}{dt} = \rho \cdot \frac{Dv}{Dt} = \rho \cdot (\frac{\partial v}{\partial t} + v \cdot \nabla v) = \rho \cdot g - \nabla p + \mu \cdot \Delta v $
+
+$ \frac{dv_i}{dt} = g - \frac{1}{\rho_i}\cdot \nabla p + \frac{\mu}{\rho_i} \cdot \Delta  v $
+- This is where we change from Euler(grid methods) to Lagrangian view (particle information) ...
+
+\subsection{Cauchy Momentum equation}
+
+
+\subsection{Constitutive equations - Deviatoric Stress Tensor}
+- Evolution of Deviatoric Stress Tensor
+- To apply the Navier-Stokes Equations to solids, a more general form is needed.
+- We use a subset of Navier-Stokes Equation
+- Constitutive equation decides whether it is a fluid or a solid
+
+- plus continuity equation
+- how does ONE Navier Stokes Equation become THREE Euler Equations?
+
+\subsection{Equations of State}
+-
+
+\subsection{Smoothed Particle Hydrodynamics}
+Now that we have our compressible Navier-Stokes Equations in Lagrangian form we want to solve them.
+
+- quite new: developed in 1992
+- goal was to solve Navier-Stokes Equations
+- Uses Smoothing Kernels ... similar concept as basis functions in FEM
+- quantities are wighted average
+
+- Terms in the Navier-Stokes Equation:
+\begin{equation} \frac{dv_i}{dt} = g - \frac{1}{\rho_i}\cdot \nabla p + \frac{\mu}{\rho_i} \cdot \Delta  v \end{equation}
+
+1) Density:
+$ \rho_i \approx \sum_j m_j \cdot W(r - r_j,h) $
+
+2)Pressure gradient:
+$ \frac{\nabla p_i}{\rho_i} \approx \sum_j m_j \cdot (\frac{p_i}{\rho^2_i} + \frac{p_j}{\rho^2_j}) \cdot \nabla W(r - r_j, h) $
+- why the gradient of W??
+
+3) Viscosity term:
+$ \frac{\mu}{\rho_i} \cdot \Delta v_i \approx \frac{\mu}{\rho_i} \cdot \sum_j m_j \cdot (\frac{v_j - v_i}{\rho_j}) \cdot \Delta W(r - r_j, h) $
+
+Smoothing kernels:
+- $ w = 0 for |r - r_0| > h $
+$ \int_{||r' - r|| \leq h} W(r' - r, h)dr' = 1 $
+- concrete Kernel implementation shown in Numerics section
