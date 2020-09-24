@@ -1,3 +1,7 @@
+%%%%%%%%%%
+% PREAMBLE
+%%%%%%%%%%
+
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
@@ -16,28 +20,32 @@
 % Commands
 %\newcommand{\vec}{\boldsymbol}
 
-% Metadata
-\title{Smoothed Particle Hydrodynamics Simulations for Asteroid Deflection}
-\author{Maximilian Rutz}
-\date{}
 
-%%%%%%%%%%%%%%%%%
-% END OF PREAMBLE
-%%%%%%%%%%%%%%%%%
-
+%%%%%%%%%%
+% INTRODUCTORY PAGES
+%%%%%%%%%%
 \begin{document}
-
-% Front page
-\maketitle
-\begin{abstract}
-   \input{sections/0_Abstract.tex}
-\end{abstract}
-
-% Contents page
+\pagenumbering{roman}
+\input{sections/0-0_Titlepage.tex}
+\thispagestyle{empty}
+\newpage
+\thispagestyle{plain}
+\input{sections/0-1_Declaration.tex}
+\newpage
+\thispagestyle{plain}
+\section*{ABSTRACT}
+\input{sections/0-2_Abstract.tex}
+\thispagestyle{empty}
 \newpage
 \tableofcontents
+\newpage
+\pagenumbering{arabic}
 
-% Body
+
+%%%%%%%%%%
+% BODY
+%%%%%%%%%%
+
 \newpage
 \section{Introduction}
 \input{sections/1_Introduction.tex}
