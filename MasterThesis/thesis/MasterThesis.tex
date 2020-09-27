@@ -1,7 +1,6 @@
 %%%%%%%%%%
 % PREAMBLE
 %%%%%%%%%%
-
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
@@ -27,25 +26,19 @@
 \begin{document}
 \pagenumbering{roman}
 \input{sections/0-0_Titlepage.tex}
-\thispagestyle{empty}
 \newpage
-\thispagestyle{plain}
+\section*{Declaration}
 \input{sections/0-1_Declaration.tex}
 \newpage
-\thispagestyle{plain}
 \section*{ABSTRACT}
 \input{sections/0-2_Abstract.tex}
-\thispagestyle{empty}
 \newpage
 \tableofcontents
-\newpage
 \pagenumbering{arabic}
-
 
 %%%%%%%%%%
 % BODY
 %%%%%%%%%%
-
 \newpage
 \section{Introduction}
 \input{sections/1_Introduction.tex}
@@ -62,7 +55,9 @@
 \section{Discussion}
 \input{sections/5_Discussion.tex}
 
-% References
+%%%%%%%%%%
+% REFERENCES
+%%%%%%%%%%
 \newpage
 \printbibliography
 
