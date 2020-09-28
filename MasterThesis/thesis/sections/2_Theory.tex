@@ -1,4 +1,4 @@
-- A very good explanation of the theory behind the Miluphcode code can be found in \cite{Schaefer_2016} and \cite{Schaefer_2020}. The explanations in these two papers are concise, well written and difficult to improve upon. The aim of this theory section is therefore only to present the subset of these equations that apply to the particular solid model used in this study. With the given equations, all parameters in Table \ref{tab:material_parameters} of Section \ref{sect:material_parameters} should be explained.
+- A very good explanation of the theory behind the Miluphcode code can be found in \cite{Schaefer_2016} and \cite{Schaefer_2020}. The explanations in these two papers are concise, well written and difficult to improve upon. The aim of this theory section is therefore only to present the subset of these equations that were used for  the particular solid model used in this study. With the given equations, all parameters in Table \ref{tab:material_parameters} of Section \ref{sect:material_parameters} should be explained.
 
 \subsection{Material derivative}
 - In SPH we want to know the local velocity change at each particle location
@@ -21,7 +21,6 @@ It gives us the change of the field property in the reference frame of the parti
 - In next sections $\frac{d}{dt}$ denotes material derivative and greek letters are used to denote spacial coordinates which go from 1 to 3. Einstein summation convention is used
 \subsection{Conservation equations}
 
-
 \subsubsection{Conservation of mass}
 - continuity equation
 \begin{equation}
@@ -31,7 +30,7 @@ It gives us the change of the field property in the reference frame of the parti
 
 \subsubsection{Conservation of momentum}
 
-\begin{equation}
+\begin{equation} \label{eq:momentum}
     \frac{\mathrm {d} v^{\alpha} }{\mathrm {d}t} - \frac{1}{\rho} \frac{\partial \sigma^{\alpha \beta} }{\partial x^{\beta}} = 0
 \end{equation}
 - $\sigma$ stress tensor
@@ -46,7 +45,7 @@ It gives us the change of the field property in the reference frame of the parti
 \end{equation}
 - u internal energy, $\dot{\epsilon}$ strain rate tensor
 \begin{equation}
-    \dot{\epsilon}^{\alpha \beta} = \frac{1}{2} (\frac{\partial v^{\alpha} }{\partial x^\beta} + \frac{\partial v^{\beta} }{\partial x^\alpha})
+    \dot{\epsilon}^{\alpha \beta} = \frac{1}{2} \left(\frac{\partial v^{\alpha} }{\partial x^\beta} + \frac{\partial v^{\beta} }{\partial x^\alpha}\right)
 \end{equation}
 
 - Set of Odes can be solved with integration schemes, only remaining unknown quantities at each step are pressure p and deviatoric stress tensor $S^{\alpha \beta}$
@@ -62,18 +61,51 @@ It gives us the change of the field property in the reference frame of the parti
 - this form of const equation takes care of elastic regime based on Hookes Law
 - plastic regime modeled by damage and strength model
 \begin{equation}
-    \frac{\mathrm {d}S^{\alpha \beta} }{\mathrm {d}t}  = 2\mu (\dot{\epsilon}^{\alpha \beta} - \frac{1}{3}\delta^{\alpha \beta}\dot{\epsilon}^{\gamma \gamma}) + S^{\alpha \gamma}R^{\gamma \beta} - R^{\alpha \gamma}S^{\gamma \beta}
+    \frac{\mathrm {d}S^{\alpha \beta} }{\mathrm {d}t}  = 2\mu \left(\dot{\epsilon}^{\alpha \beta} - \frac{1}{3}\delta^{\alpha \beta}\dot{\epsilon}^{\gamma \gamma}\right) + S^{\alpha \gamma}R^{\gamma \beta} - R^{\alpha \gamma}S^{\gamma \beta}
 \end{equation}
 - $\mu$ shear modulus as in Table \ref{tab:material_parameters}, rotation rate sensor $R^{\alpha \beta}$
 \begin{equation}
-    R^{\alpha \beta} = \frac{1}{2} (\frac{\partial v^{\alpha} }{\partial x^\beta} - \frac{\partial v^{\beta} }{\partial x^\alpha})
+    R^{\alpha \beta} = \frac{1}{2} \left(\frac{\partial v^{\alpha} }{\partial x^\beta} - \frac{\partial v^{\beta} }{\partial x^\alpha}\right)
 \end{equation}
 
 \subsubsection{Fracture model} \label{sect:fracture_model}
+If enough force is applied, brittle materials can break. Cracks develop and get larger when tensile loading happens. SPH particles in this model carry both a quantity d for damage and a varying number of crack thresholds. The damage $d \in \left[0, 1\right]$ leads to a reduction of the influence of the deviatoric stress tensor $S^{\alpha \beta}$ on the stress tensor $\sigma^{\alpha \beta}$ and thereby on the momentum transfer in Equation \ref{eq:momentum}.
 
-- damage
+\begin{equation}
+    \sigma^{\alpha \beta}_d = -\hat{p}\delta^{\alpha \beta} + (1 - d)S^{\alpha \beta}
+\end{equation}
 
-- Weibull distribution
+Also, damaged material will not be able to experience negative pressure:
+\begin{equation}
+    \hat{p} =
+    \begin{cases}
+        p,        & \text{for } p \geq 0 \\
+        (1 - d)p, & \text{for } p < 0
+    \end{cases}
+\end{equation}
+Negative pressure in this context describes tension which arises when solids are pulled. A damaged material will no longer exert any tension against pulling forces. \\
+
+The starting point for accumulating damage are cracks in the material. These cracks are modeled as thresholds that are randomly distributed through the material following a Weibull distribution.
+
+PLOT WEIBULL DISTRIBUTION matplotlib
+
+\begin{equation}
+    n(\epsilon) = k\epsilon^m
+\end{equation}
+
+Parameters for the weibull distribution have been experimentally determined for basalt by \cite{Nakamura_2007}. They can be found in Table \ref{tab:material_parameters} in Section \ref{sect:material_parameters}.
+
+Whenever the strain on a Volume exceeds its lowest crack threshold, damage will grow around this crack as
+
+\begin{equation}
+    \frac{\mathrm{d}}{\mathrm{d}t} d^{\frac{1}{3}} = \frac{c_g}{R}
+\end{equation}
+
+where $R$ is the distance to the crack and $c_g$ the growth velocity which follows from the density $\rho$, bulk modulus $K_0$, current damage $d$ and shear modulus $\mu$:
+
+\begin{equation}
+    c_g = 0.4\frac{1}{\rho}\sqrt{K_0 + \frac{4}{3}(1-d)\mu}
+\end{equation}
 
 \subsubsection{Pressure dependent yield strength}
 - ideas in \cite{Collins_2004}
@@ -120,7 +152,7 @@ The coefficients of internal friction $\mu = tan(\alpha)$ depend upon the angles
 
 1) $u \leq E_{iv}$
 \begin{equation}
-    p = (a_T + \frac{b_T}{1 + \frac{u}{E_0\eta^2}})\rho u + A_T \chi + B_T \chi^2
+    p = \left(a_T + \frac{b_T}{1 + \frac{u}{E_0\eta^2}}\right)\rho u + A_T \chi + B_T \chi^2
 \end{equation}
 
 
@@ -140,6 +172,8 @@ There are different ways in which porosity can be modeled depending on the pore 
 
 Microporosity models porosity as an additional material property and can be applied independently of the resolution.
 
+The main goal of the porosity model is to separate the compression of the pores in a porous material from the elastic or plastic deformation that is modeled with the strength model.
+
 In these simulations, a microporosity p-$\alpha$ model as outlined in \cite{Jutzi_2008} is used. The distention $\alpha \in \left[1,\infty\right)$ relates the current density $\rho$ to the solid density $\rho_s$ which is reached if the material is fully compressed. For a non-porous material $\alpha$ equals one.
 
 \begin{equation}
@@ -148,5 +182,32 @@ In these simulations, a microporosity p-$\alpha$ model as outlined in \cite{Jutz
 
 with the porosity $\phi \in \left[0, 1\right)$.
 
-- Quadratic crush curve
+The p-$\alpha$ model connects the distention with the pressure. Empirically it was found \cite{Carroll_1972} that this relation can be modeled as
 
+\begin{equation}
+    p = \frac{1}{\alpha}\,p_s(\alpha\rho, u)
+\end{equation}
+
+where $p_s$ is the pressure of the material in the solid, non-porous case. At the same time the distention depends on the pressure. There are different ways to model this relation. In this study, a crush-curve with quadratic dependence on the pressure has been used
+
+\begin{equation}
+    \alpha = 1 + \left(\alpha_e - 1 \right) \frac{\left(p_s - p\right)^2}{\left(p_s - p_e\right)^2}
+\end{equation}
+
+where $\alpha_e$ = $\alpha\left(p_e\right)$ and $p_e$ is the pressure at which the material enters the plastic from the elastic regime. In the elastic regime below $p_e$ as well as above the second threshold $p_s$ the distention stays constant. At $p_s$ the material is completely solid with regard to porosity and the pores can not be compacted anymore. When calculating the change of distention in the elastic regime, the dependence of the distention on the pressure has to be accounted for. Using the chain rule
+
+\begin{equation}
+    \dot{\alpha} = \frac{\mathrm{d}\alpha}{\mathrm{d}p}\frac{\mathrm{d}p}{\mathrm{d}t}
+\end{equation}
+
+one arrives at the following expression for the time evolution of the distention:
+
+\begin{equation}
+    \left(\frac{\mathrm{d}\alpha}{\mathrm{d}p}\right)_{elastic} = \frac{\alpha^2}{K_0}\left(1 - \left[ \frac{1}{h(\alpha)^2}[\right]\right)
+\end{equation}
+
+\begin{equation}
+    h(\alpha) = 1 + (\alpha - 1)\frac{c_e - c_0}{c_0(\alpha_e - 1)}
+\end{equation}
+
+where $c_0$ and $c_e$ are the sound speeds for material that is fully expanded and at the begin of the elastic regime respectively.

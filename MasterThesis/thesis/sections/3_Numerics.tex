@@ -93,20 +93,18 @@ The kernel function $W(|\vec{r} - \vec{r'}|$, h) at the particle location $\vec{
                                               & $\alpha_T$              & 5.0                              & 5.0                              \\
                                               & $\beta_T$               & 5.0                              & 5.0                              \\ \hline
         \multirow{7}{*}{Porosity}             & $\alpha_0$              & \textbf{varying}                 & not porous                       \\
-                                              & $p_{elastic}$           & 1.0 $\cdot 10^6$ Pa              & not porous                       \\
-                                              & $p_{transition}$        & 6.8 $\cdot 10^7$ Pa              & not porous                       \\
-                                              & $p_{compacted}$         & 2.13 $\cdot 10^8$ Pa             & not porous                       \\
-                                              & $\alpha_e$              & 4.64                             & not porous                       \\
-                                              & $\alpha_t$              & 1.90                             & not porous                       \\
-                                              & $c_s$                   & 100.0 $m\cdot s^{-1}$            & not porous                       \\ \hline
+                                              & $p_{e}$                 & 1.0 $\cdot 10^6$ Pa              & not porous                       \\
+                                              & $p_{s}$                 & 2.13 $\cdot 10^8$ Pa             & not porous                       \\
+                                              & $c_e$                   & 100.0 $m\cdot s^{-1}$            & not porous                       \\ \hline
         \multirow{6}{*}{Strength}             & cohesive strength $Y_c$ & \textbf{varying}                 & 1.0 $\cdot 10^9$ Pa              \\
                                               & $\alpha_{intact}$       & 0.982793 rad                     & 0 rad                            \\
                                               & $\alpha_{damaged}$      & 0.540419 rad                     & 0 rad                            \\
                                               & shear modulus $\mu$     & 2.27 $\cdot 10^{10}$ Pa          & 2.69 $\cdot 10^{10}$ Pa          \\
                                               & bulk modulus $K_0$      & 2.67 $\cdot 10^{10}$ Pa          & 5.23 $\cdot 10^{10}$ Pa          \\
                                               & shear strength $Y_M$    & 3.5 $\cdot 10^9$ Pa              & 2.76 $\cdot 10^8$ Pa             \\ \hline
-        \multirow{2}{*}{Fragmentation}        & Weibull m               & 16                               & no damage                        \\
-                                              & Weibull k               & 1.0 $\cdot 10^{61}$              & no damage                        \\ \hline
+        \multirow{3}{*}{Fracture}             & Weibull m               & 16                               & no damage                        \\
+                                              & Weibull k               & 1.0 $\cdot 10^{61}$              & no damage                        \\
+                                              & Initial damage $d_0$    & 0                                & no damage                        \\  \hline
         \multirow{2}{*}{Artificial viscosity} & $\alpha$                & 1.0                              & 1.0                              \\
                                               & $\beta$                 & 2.0                              & 2.0                              \\ \hline
         \hline
