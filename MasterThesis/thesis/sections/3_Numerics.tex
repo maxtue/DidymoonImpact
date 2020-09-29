@@ -44,13 +44,22 @@ The kernel function $W(|\vec{r} - \vec{r'}|$, h) at the particle location $\vec{
 
 \subsubsection{Smoothing length}
 - can be variable -> great strength of SPH
-- material density and h have to fit together
+\begin{equation}
+    \frac{\mathrm{d}h}{\mathrm{d}t} = \frac{h}{d}\frac{\partial v^{\alpha}}{\partial x^{\alpha}}
+\end{equation}
 
 \subsubsection{Artificial viscosity}
 - what it is
 - why it is needed
+\begin{equation}
+    {\frac {\mathrm {d} {\vec {v}}_{a}}{\mathrm {d} t}}=-\sum \limits _{b}m_{b}\left({\frac {P_{b}}{\rho _{b}^{2}}}+{\frac {P_{a}}{\rho _{a}^{2}}}+\Pi _{ab}\right)\nabla _{a}W_{ab}
+\end{equation}
 
 \subsubsection{Time Integration}
+- second order embedded Runge Kutta with adaptive timestep and relative error (precision) of 10e-6
+
+- Schaefer 2016 3.4.2
+
 
 \subsection{Initial conditions}
 \subsubsection{Particle setup}
@@ -59,6 +68,7 @@ The kernel function $W(|\vec{r} - \vec{r'}|$, h) at the particle location $\vec{
 - resolution bound to variable smoothing length \\
 - Uniform macro structure but random micro structure to avoid \\
 - seagen \cite{github:SEAGen} used to create initial conditions
+- material density and h have to fit together
 
 \begin{figure}[H]
     \centering
