@@ -85,15 +85,13 @@ Also, damaged material will not be able to experience negative pressure:
 \end{equation}
 Negative pressure in this context describes tension which arises when solids are pulled. A damaged material will no longer exert any tension against pulling forces. \\
 
-The starting point for accumulating damage are cracks in the material. These cracks are modeled as thresholds that are randomly distributed through the material following a Weibull distribution.
-
-PLOT WEIBULL DISTRIBUTION matplotlib
+The starting point for accumulating damage are cracks in the material. These cracks are modeled as strain thresholds that are randomly distributed through the material. The threshold values for all strains $j \in 1...n$ in a given Volume $V$ are determined by the Weibull distribution:
 
 \begin{equation}
-    n(\epsilon) = k\epsilon^m
+    \epsilon = \left(\frac{j}{kV}\right)^\frac{1}{m}
 \end{equation}
 
-Parameters for the weibull distribution have been experimentally determined for basalt by \cite{Nakamura_2007}. They can be found in Table \ref{tab:material_parameters} in Section \ref{sect:material_parameters}.
+The material parameters $k$ and $m$ for the weibull distribution have been experimentally determined for basalt by \cite{Nakamura_2007}. They can be found in Table \ref{tab:material_parameters} in Section \ref{sect:material_parameters}.
 
 Whenever the strain on a Volume exceeds its lowest crack threshold, damage will grow around this crack as
 
