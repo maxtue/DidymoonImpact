@@ -1,4 +1,4 @@
-- how numerics are used to solve Equations from Theory section
+Similar to the Theory section, this section will describe the subset of the techniques implemented in the Miluphcuda code \cite{Schaefer_2016}, \cite{Schaefer_2020} that were used in the simulations for this study.
 
 \subsection{Smoothed Particle Hydrodynamics}
 - before finite difference schemes with spherical coordinates
@@ -59,6 +59,11 @@ The kernel function $W(|\vec{r} - \vec{r'}|$, h) at the particle location $\vec{
 - second order embedded Runge Kutta with adaptive timestep and relative error (precision) of 10e-6
 
 - Schaefer 2016 3.4.2
+
+Once the partial differential equations are broken down into first order ordinary differential equations in time these equations still need to be solved. There are several well known techniques available to do so. In the simulations for this study a 3rd order Runge-Kutta solver with an adaptive timestep has been used. Runge-Kutta is an explicit method which uses
+\begin{equation}
+    aaa
+\end{equation}
 
 
 \subsection{Initial conditions}
